@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/04/22 15:37:41 by FannyHuang       ###   ########.fr       */
+/*   Updated: 2017/10/19 18:59:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static void	fract_ol_init_fractal_param(t_fractal *fractal)
 {
-	if (fractal->fractal_type == MANDELBROT)
+	if (fractal->type == MANDELBROT)
 	{
 		// fractal->coord[0] = -3.1;
 		fractal->coord[0] = -1.97;
@@ -42,13 +42,11 @@ int		main(int ac, char **av)
 		return (-fract_ol_error("Could not init mlx."));
 	if (!(e.win = mlx_new_window(e.mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, WINDOW_NAME)))
 		return (-fract_ol_error("Could not create a new window."));
-
-	e.mlx_img.fractal.fractal_type = MANDELBROT;
+	e.mlx_img.fractal.type = fract_ol_name_to_type("Mandelbrot");
 
 	fract_ol_init_fractal_param(&e.mlx_img.fractal);
 	if (!fract_ol_create_image(&e))
 		return (-fract_ol_error("An error occured during the image creation."));
-
 	mlx_mouse_hook(e.win, fract_ol_mouse_hook, &e);
 	// mlx_hook(e.win, ButtonRelease, ButtonReleaseMask, fract_ol_mouse_hook, &e);
 	mlx_hook(e.win, KeyPress, KeyPressMask, fract_ol_key_hook, &e);
