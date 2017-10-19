@@ -1,4 +1,5 @@
 obj/
 .cache_exists
 .idea/
+libft/lib/
 fract_ol
