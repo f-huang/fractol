@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 17:04:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 19:54:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ static void	fract_ol_draw_fractal(t_mlx_img *mlx_img)
 	ft_bzero(&c, sizeof(t_complex));
 	while (offset.x < mlx_img->width)
 	{
-		c.real = offset.x / mlx_img->fractal.zoom + mlx_img->fractal.x;
+		c.real = offset.x / mlx_img->fractal.zoom + mlx_img->fractal.abscissa.min;
 		offset.y = 0;
 		while (offset.y < mlx_img->height)
 		{
-			c.imaginary = offset.y / mlx_img->fractal.zoom + mlx_img->fractal.y;
+			c.imaginary = offset.y / mlx_img->fractal.zoom + mlx_img->fractal.ordinate.min;
 			i = define_z_complex(c, mlx_img->fractal.iteration);
 			put_pixel_in_fract_ol(mlx_img, offset, i);
 			++offset.y;

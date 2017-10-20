@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 18:09:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 19:53:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	fract_ol_init_fractal_param(t_fractal *fractal)
 {
 	if (fractal->type == MANDELBROT)
 	{
-		fractal->abscissa = (t_range) { .min = -2.1, .max = 0.6 };
-		fractal->ordinate = (t_range) { .min = -1.2, .max = 1.2 };
-		fractal->x = fractal->abscissa.min;
-		fractal->y = fractal->ordinate.min;
+		fractal->abscissa = (t_range) { .min = MANDELBROT_X1, .max = MANDELBROT_X2 };
+		fractal->ordinate = (t_range) { .min = MANDELBROT_Y1, .max = MANDELBROT_Y2 };
+		// fractal->x = fractal->abscissa.min;
+		// fractal->y = fractal->ordinate.min;
 		fractal->zoom = (IMAGE_HEIGHT / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
 			+ IMAGE_WIDTH / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_WIDTH * 0.02;
 		// fractal->zoom = 200;

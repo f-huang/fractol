@@ -6,6 +6,11 @@
 # define IMAGE_WIDTH 900
 # define IMAGE_HEIGHT 900
 
+# define MANDELBROT_X1 -2.1
+# define MANDELBROT_X2 0.6
+# define MANDELBROT_Y1 -1.2
+# define MANDELBROT_Y2 1.2
+
 enum			e_fractal_type
 {
 	MANDELBROT = 0
@@ -62,8 +67,8 @@ typedef struct	s_fractal
 	double				zoom;
 	t_range				abscissa;
 	t_range				ordinate;
-	double				x; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
-	double				y; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
+	// double				x; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
+	// double				y; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
 	unsigned int		iteration;
 }				t_fractal;
 
@@ -89,7 +94,7 @@ typedef struct	s_env
 enum e_fractal_type	fract_ol_name_to_type(const char *name);
 const char			*get_fractal_type_name(enum e_fractal_type type);
 
-void	fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
+void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
 int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
 int					fract_ol_key_hook(int keycode, t_env *e);
