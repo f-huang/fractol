@@ -6,15 +6,16 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 12:11:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/07 12:43:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:50:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
-static void			transform_flags(t_printf *link, char *str, int len)
+static void			transform_flags(t_print *link, char *str, int len)
 {
-	static void	(*p[5])(t_printf *link, char *str, int len, bool neg);
+	static void	(*p[5])(t_print *link, char *str, int len, int neg);
 	int			i;
 
 	PRECISION >= 0 ? str = ft_strncpy(str, str, PRECISION) : 0;
@@ -32,14 +33,14 @@ static void			transform_flags(t_printf *link, char *str, int len)
 	p[4] = transform_minus;
 	i = -1;
 	while (++i < 5)
-		(*p[i])(link, str, len, false);
+		(*p[i])(link, str, len, 0);
 	len = WIDTH - ft_strlen(str) - ((C == 'c' || C == 'C')\
 		&& U_VAR.i == 0 ? 1 : 0);
 	WIDTH ? PUSH_FRONT(' ', len) : 0;
 	RET = str;
 }
 
-static int			get_len(t_printf *link, char *ret)
+static int			get_len(t_print *link, char *ret)
 {
 	int			len;
 
@@ -53,7 +54,7 @@ static int			get_len(t_printf *link, char *ret)
 	return (len);
 }
 
-static void			get_s_conversion(t_printf *link, char **str)
+static void			get_s_conversion(t_print *link, char **str)
 {
 	if (PRECISION == 0)
 		*str = ft_strdup(U_VAR.s);
@@ -63,7 +64,7 @@ static void			get_s_conversion(t_printf *link, char **str)
 		*str = ft_strndup(U_VAR.s, PRECISION);
 }
 
-void				transform_for_strings(t_printf *link)
+void				transform_for_strings(t_print *link)
 {
 	char		*ret;
 	char		*new;
@@ -78,7 +79,7 @@ void				transform_for_strings(t_printf *link)
 			U_VAR.ws : &U_VAR.wc);
 	else if (E_TYPE == T_VOID)
 		ret = U_VAR.p == NULL && PRECISION == -1 ? ft_strdup("") :\
-		ft_lltoa_base((int64_t)U_VAR.p, 16, true);
+		ft_lltoa_base((int64_t)U_VAR.p, 16, 1);
 	else if (E_TYPE == T_CHAR)
 		ret = ft_strndup((char*)(&U_VAR.i), 1);
 	else

@@ -6,15 +6,17 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/17 15:57:02 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 18:47:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:36:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "ft_printf.h"
 
-static void		total_len(t_ft_printf_env *e, size_t *len)
+static void		total_len(t_printf_tools *e, size_t *len)
 {
-	t_printf		*link;
+	t_print		*link;
 
 	*len = 0;
 	link = e->full_lst;
@@ -25,12 +27,12 @@ static void		total_len(t_ft_printf_env *e, size_t *len)
 	}
 }
 
-static char		*final_string(t_ft_printf_env *e, size_t len)
+static char		*final_string(t_printf_tools *e, size_t len)
 {
 	size_t		i;
 	size_t		j;
 	char		*str;
-	t_printf		*link;
+	t_print		*link;
 
 	if ((str = ft_strnew(len)) == NULL)
 		exit(EXIT_FAILURE);
@@ -46,7 +48,7 @@ static char		*final_string(t_ft_printf_env *e, size_t len)
 	return (str);
 }
 
-int				print_entire_list(t_ft_printf_env *e, int fd)
+int				print_entire_list(t_printf_tools *e, int fd)
 {
 	size_t		len;
 	char		*str;

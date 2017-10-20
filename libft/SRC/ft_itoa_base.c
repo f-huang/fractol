@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 13:40:41 by fhuang            #+#    #+#             */
-/*   Updated: 2016/10/28 16:35:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 18:19:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char		*ft_itoa_base(int n, int base)
 	char				*ret;
 	unsigned int		uin;
 	int					len;
-	bool				neg;
+	int					neg;
 
 	neg = (base == 10 && n < 0) ? 1 : 0;
-	neg == false ? ABS(n) : 1;
+	neg == 1 ? ABS(n) : 1;
 	uin = (unsigned int)n;
 	len = count_n(uin, base) + neg;
 	if ((ret = ft_strnew(len)) == NULL)

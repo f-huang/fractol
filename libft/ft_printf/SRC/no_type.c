@@ -6,15 +6,16 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 14:32:17 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/07 12:18:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:49:19 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
-void		no_type_conversion(t_printf *link)
+void		no_type_conversion(t_print *link)
 {
-	static void	(*p[5])(t_printf *link, char *str, int len, bool neg);
+	static void	(*p[5])(t_print *link, char *str, int len, int neg);
 	int			len;
 	char		*str;
 	int			i;
@@ -32,7 +33,7 @@ void		no_type_conversion(t_printf *link)
 	p[4] = transform_minus;
 	i = -1;
 	while (++i < 5)
-		(*p[i])(link, str, len, false);
+		(*p[i])(link, str, len, 0);
 	WIDTH ? PUSH_FRONT(' ', WIDTH - ft_strlen(str)) : 0;
 	RET = str;
 }

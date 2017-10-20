@@ -6,23 +6,18 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 15:24:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 16:43:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <string.h>
-
 # include "ft_printf.h"
 
 # define SIZE_DYNAM 16
 # define BUFF_SIZE 2056
-# define ABS(x) x = x < 0 ? -x : x
+# define ABS(x) (x = x < 0 ? -x : x)
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
 # define YELLOW "\x1b[33m"
@@ -30,6 +25,8 @@
 # define MAGENTA "\x1b[35m"
 # define CYAN "\x1b[36m"
 # define COLOR_RESET "\x1b[0m"
+
+# define FT_DEBUG(FORMAT, ...) (ft_printf("[DEBUG]  "FORMAT"\n", ##__VA_ARGS__))
 
 /*
 **	GNL.H
@@ -185,6 +182,12 @@ size_t				ft_wcslen(const wchar_t *wstr);
 void				ft_exit(char *str);
 
 /*
+**	INT TAB FUNCTIONS
+*/
+
+int					*ft_intabndup(int *tab_to_dup, size_t start, size_t end);
+
+/*
 **	TAB FUNCTIONS
 */
 
@@ -201,7 +204,9 @@ char				**ft_tabndup(char **tab, int n);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
 size_t				ft_nbrlen(int n);
+size_t				ft_nbrlen_base(unsigned long n, int base);
 unsigned int		ft_power_pos(unsigned int n, unsigned int p);
+double				ft_abs(double n);
 
 /*
 **	MEM FUNCTIONS
@@ -217,6 +222,5 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
-void				*ft_realloc(void *ptr, size_t size);
 
 #endif

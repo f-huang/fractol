@@ -6,15 +6,15 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 17:52:12 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/09 18:52:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:36:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		arglst_add(t_printf **lst, t_printf *new)
+static void		arglst_add(t_print **lst, t_print *new)
 {
-	t_printf		*link;
+	t_print		*link;
 
 	if (*lst)
 	{
@@ -27,10 +27,10 @@ static void		arglst_add(t_printf **lst, t_printf *new)
 		*lst = new;
 }
 
-void			add_link(t_ft_printf_env *e, t_printf *new, bool arg)
+void			add_link(t_printf_tools *e, t_print *new, int arg)
 {
-	t_printf		*link;
-	t_printf		**lst;
+	t_print		*link;
+	t_print		**lst;
 
 	new->next = NULL;
 	new->next_arg = NULL;

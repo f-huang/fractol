@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dynam_append.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhuang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 12:00:55 by fhuang            #+#    #+#             */
-/*   Updated: 2016/02/24 12:01:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:40:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 int		ft_dynam_append(t_dynam *dyn, void *new_d, size_t nb)

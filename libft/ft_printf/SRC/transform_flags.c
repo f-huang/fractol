@@ -6,29 +6,29 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 16:23:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/09 13:45:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:48:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		transform_plus(t_printf *link, char *str, int len, bool neg)
+void		transform_plus(t_print *link, char *str, int len, int neg)
 {
 	if (FLAG[PLUS] == 0)
 		return ;
-	neg == false || U_VAR.i == 0 ? PUSH_FRONT('+', 1) : 0;
+	neg == 0 || U_VAR.i == 0 ? PUSH_FRONT('+', 1) : 0;
 	(void)len;
 }
 
-void		transform_space(t_printf *link, char *str, int len, bool neg)
+void		transform_space(t_print *link, char *str, int len, int neg)
 {
 	if (FLAG[SPACE] == 0)
 		return ;
-	neg == false ? PUSH_FRONT(' ', 1) : 0;
+	neg == 0 ? PUSH_FRONT(' ', 1) : 0;
 	(void)len;
 }
 
-void		transform_hash(t_printf *link, char *str, int len, bool neg)
+void		transform_hash(t_print *link, char *str, int len, int neg)
 {
 	if (FLAG[HASH] == 0)
 		return ;
@@ -45,7 +45,7 @@ void		transform_hash(t_printf *link, char *str, int len, bool neg)
 	(void)neg;
 }
 
-void		transform_minus(t_printf *link, char *str, int len, bool neg)
+void		transform_minus(t_print *link, char *str, int len, int neg)
 {
 	if (FLAG[MINUS] == 0)
 		return ;
@@ -53,7 +53,7 @@ void		transform_minus(t_printf *link, char *str, int len, bool neg)
 	(void)neg;
 }
 
-void		transform_zero(t_printf *link, char *str, int len, bool neg)
+void		transform_zero(t_print *link, char *str, int len, int neg)
 {
 	int		n;
 
@@ -65,6 +65,6 @@ void		transform_zero(t_printf *link, char *str, int len, bool neg)
 	else if (FLAG[HASH] && (((C == 'x' || C == 'X') && U_VAR.ull != 0) ||\
 		(C == 'p')))
 		n -= 2;
-	((FLAG[PLUS] && neg == false) || FLAG[SPACE]) ? n-- : 0;
+	((FLAG[PLUS] && neg == 0) || FLAG[SPACE]) ? n-- : 0;
 	PUSH_FRONT(48, n);
 }

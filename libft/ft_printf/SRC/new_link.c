@@ -6,19 +6,20 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 22:48:56 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/12 02:30:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:36:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
-int		new_link(t_ft_printf_env *e, char *str, char *type, bool arg)
+int		new_link(t_printf_tools *e, char *str, char *type, int arg)
 {
-	t_printf		*new;
+	t_print		*new;
 
-	if (!(new = (t_printf*)ft_memalloc(sizeof(t_printf))))
+	if (!(new = (t_print*)ft_memalloc(sizeof(t_print))))
 		exit(EXIT_FAILURE);
-	if (arg == false)
+	if (arg == 0)
 	{
 		if ((new->transformed_str = ft_strndup(str, (int)(type - str))) == NULL)
 			exit(EXIT_FAILURE);

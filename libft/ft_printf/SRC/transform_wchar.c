@@ -6,10 +6,11 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 19:36:48 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/06 19:42:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:50:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
 char			*mask(char *str, int n_octet, int signif_bits)
@@ -40,7 +41,7 @@ char			*mask(char *str, int n_octet, int signif_bits)
 
 int				get_n_octet(char **tmp, wchar_t c, int *signif_bits)
 {
-	*tmp = ft_printf_itoa_base((unsigned int)c, 2, true);
+	*tmp = ft_printf_itoa_base((unsigned int)c, 2, 1);
 	if (*tmp == NULL)
 		exit(EXIT_FAILURE);
 	*signif_bits = ft_strlen(*tmp);
@@ -98,7 +99,7 @@ unsigned char	*transform_wchar(wchar_t wchar, int *count)
 	return (convert_to_utf8(binary, n_octet));
 }
 
-unsigned char	*transform_wstr(t_printf *link, wchar_t *wstr)
+unsigned char	*transform_wstr(t_print *link, wchar_t *wstr)
 {
 	int				i;
 	int				count;

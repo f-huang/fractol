@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 22:46:11 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 16:07:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:48:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	get_modifier(int *modifier, char c)
 	return (-1);
 }
 
-static int	get_flag(t_printf *link, char c)
+static int	get_flag(t_print *link, char c)
 {
 	int		i;
 
@@ -47,10 +47,10 @@ static int	get_flag(t_printf *link, char c)
 	return (-1);
 }
 
-static int	get_precision_or_width(t_printf *link, char *ptr, char type,\
-				bool p)
+static int	get_precision_or_width(t_print *link, char *ptr, char type,\
+				int p)
 {
-	if (p == true)
+	if (p == 1)
 	{
 		PRECISION = ft_atoi(ptr);
 		if (type == 's' && PRECISION == 0)
@@ -72,7 +72,7 @@ static int	get_precision_or_width(t_printf *link, char *ptr, char type,\
 	return (ft_nbrlen(ft_atoi(ptr)));
 }
 
-int			get_struct(t_printf *link, char *str, char type, int i)
+int			get_struct(t_print *link, char *str, char type, int i)
 {
 	int		tmp;
 	char	*ptr;
@@ -80,16 +80,16 @@ int			get_struct(t_printf *link, char *str, char type, int i)
 
 	ptr = str;
 	ft_bzero(modifier, sizeof(int) * 4);
-	while (str[++i] && str[i] != type && (tmp = 0) == false)
+	while (str[++i] && str[i] != type && (tmp = 0) == 0)
 		if ((get_flag(link, str[i])) == -1)
 		{
 			if (ft_isdigit(str[i]))
-				(tmp = get_precision_or_width(link, str + i, type, false)) != 0\
+				(tmp = get_precision_or_width(link, str + i, type, 0)) != 0\
 					? i += tmp : 0;
-			if (type != '.' && str[i] == '.' && (tmp = 0) == false)
+			if (type != '.' && str[i] == '.' && (tmp = 0) == 0)
 			{
 				if ((i += get_precision_or_width(link, str + i + 1, type,\
-					true)) && str[i] == type)
+					1)) && str[i] == type)
 					break ;
 			}
 			else if (str[i] != type && ft_strchr(FLAGS_PAT, str[i]) == 0 &&\

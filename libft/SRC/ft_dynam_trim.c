@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dynam_trim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhuang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 22:14:45 by fhuang            #+#    #+#             */
-/*   Updated: 2016/02/24 11:59:29 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:40:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 int		ft_dynam_trim(t_dynam *dynam)

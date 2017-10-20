@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_nbrlen_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 19:37:31 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/19 11:42:00 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/19 13:11:52 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/19 18:32:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <stddef.h>
 
-void	ft_memdel(void **ap)
+size_t		ft_nbrlen_base(unsigned long n, int base)
 {
-	free(*ap);
-	*ap = NULL;
+	size_t		size;
+
+	size = 1;
+	while (n / base)
+	{
+		n /= base;
+		size++;
+	}
+	return (size);
 }

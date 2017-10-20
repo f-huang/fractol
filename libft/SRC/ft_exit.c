@@ -6,10 +6,11 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 16:53:06 by fhuang            #+#    #+#             */
-/*   Updated: 2016/10/06 16:53:37 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:40:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 void	ft_exit(char *str)

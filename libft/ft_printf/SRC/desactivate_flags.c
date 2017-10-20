@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void			desactivate_hash_key(t_printf *link, char type)
+static void			desactivate_hash_key(t_print *link, char type)
 {
 	const char	s1[] = "cdips";
 	int			i;
@@ -26,7 +26,7 @@ static void			desactivate_hash_key(t_printf *link, char type)
 	}
 }
 
-static void			desactivate_zero(t_printf *link, char type)
+static void			desactivate_zero(t_print *link, char type)
 {
 	const char	s2[] = "dibopuxX";
 	int			i;
@@ -40,7 +40,7 @@ static void			desactivate_zero(t_printf *link, char type)
 	}
 }
 
-static void			desactivate_space(t_printf *link, char type)
+static void			desactivate_space(t_print *link, char type)
 {
 	if (FLAG[PLUS] == 1 && FLAG[SPACE] == 1)
 		FLAG[SPACE] = 0;
@@ -48,13 +48,13 @@ static void			desactivate_space(t_printf *link, char type)
 		FLAG[SPACE] = 0;
 }
 
-static void			desactivate_plus(t_printf *link, char type)
+static void			desactivate_plus(t_print *link, char type)
 {
 	if (type != 'i' && type != 'd')
 		FLAG[PLUS] = 0;
 }
 
-void				desactivate_flags(t_printf *link, char type)
+void				desactivate_flags(t_print *link, char type)
 {
 	if (FLAG[0] == 1)
 		desactivate_hash_key(link, type);

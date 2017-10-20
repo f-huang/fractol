@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 13:40:41 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/12 00:56:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/19 11:46:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@ static int	count_n(unsigned long long n, int base)
 	return (ret);
 }
 
-char		*ft_lltoa_base(long long n, int base, bool is_uin)
+char		*ft_lltoa_base(long long n, int base, int is_uin)
 {
-	char				pattern[17];
+	const char			pattern[17] = "0123456789ABCDEF";
 	char				*ret;
 	unsigned long long	uin;
 	int					len;
-	bool				neg;
+	int				neg;
 
-	ft_strcpy(pattern, "0123456789abcdef");
 	neg = (base == 10 && n < 0) ? 1 : 0;
-	neg && is_uin == false ? ABS(n) : 1;
+	neg && is_uin == 0 ? ABS(n) : 1;
 	uin = (unsigned long long)n;
 	len = count_n(uin, base);
 	if ((ret = ft_strnew(len)) == NULL)

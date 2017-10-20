@@ -6,14 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/11 22:56:34 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/11 23:29:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:36:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #define VA_ARG(x) va_arg(*ap, x)
 
-void		get_variable2(t_printf *link, va_list *ap)
+void		get_variable2(t_print *link, va_list *ap)
 {
 	if (E_TYPE == T_INT || E_TYPE == T_SHORT || E_TYPE == T_USHORT ||\
 		E_TYPE == T_CHAR || E_TYPE == T_UCHAR)
@@ -34,7 +34,7 @@ void		get_variable2(t_printf *link, va_list *ap)
 		U_VAR.ull = VA_ARG(unsigned long long);
 }
 
-void		get_variable(t_printf *link, va_list *ap)
+void		get_variable(t_print *link, va_list *ap)
 {
 	if (E_TYPE == T_CHAR && C == 'c')
 		U_VAR.i = VA_ARG(int);
@@ -55,9 +55,9 @@ void		get_variable(t_printf *link, va_list *ap)
 	transform_for_strings(link);
 }
 
-void		read_and_transform_arg(t_ft_printf_env *e)
+void		read_and_transform_arg(t_printf_tools *e)
 {
-	t_printf		*link;
+	t_print		*link;
 
 	link = e->arg_lst;
 	while (link)

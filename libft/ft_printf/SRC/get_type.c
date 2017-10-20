@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void		get_type_str_or_point(t_printf *link, int *modifier, char type)
+static void		get_type_str_or_point(t_print *link, int *modifier, char type)
 {
 	if (type == 's')
 		E_TYPE = modifier[1] ? T_WSTR : T_STR;
@@ -22,7 +22,7 @@ static void		get_type_str_or_point(t_printf *link, int *modifier, char type)
 		E_TYPE = T_VOID;
 }
 
-int				get_type(t_printf *link, int *modifier, char type)
+int				get_type(t_print *link, int *modifier, char type)
 {
 	int			i;
 

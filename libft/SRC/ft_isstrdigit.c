@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 15:28:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 13:23:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:56:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int			ft_isstrdigit(char const *s)
 	i = 0;
 	if (s[i] && (s[i] == '-' || s[i] == '+'))
 		i++;
+	if (!s[i])
+		return (0);
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]) == 0)

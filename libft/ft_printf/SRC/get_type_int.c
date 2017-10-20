@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void		modifier_z(t_printf *link, char type)
+static void		modifier_z(t_print *link, char type)
 {
 	if (type == 'i' || type == 'd')
 		E_TYPE = T_LONG;
@@ -20,7 +20,7 @@ static void		modifier_z(t_printf *link, char type)
 		E_TYPE = T_ULONG;
 }
 
-static void		modifier_j(t_printf *link, char type)
+static void		modifier_j(t_print *link, char type)
 {
 	if (type == 'i' || type == 'd')
 		E_TYPE = T_INMAX;
@@ -28,7 +28,7 @@ static void		modifier_j(t_printf *link, char type)
 		E_TYPE = T_UINMAX;
 }
 
-static void		modifier_l(t_printf *link, int *modifier, char type)
+static void		modifier_l(t_print *link, int *modifier, char type)
 {
 	if (modifier[1] == 1)
 	{
@@ -46,7 +46,7 @@ static void		modifier_l(t_printf *link, int *modifier, char type)
 	}
 }
 
-static void		modifier_h(t_printf *link, int *modifier, char type)
+static void		modifier_h(t_print *link, int *modifier, char type)
 {
 	if (modifier[0] == 1)
 	{
@@ -64,7 +64,7 @@ static void		modifier_h(t_printf *link, int *modifier, char type)
 	}
 }
 
-void			get_type_int(t_printf *link, int *modifier, char type)
+void			get_type_int(t_print *link, int *modifier, char type)
 {
 	if (modifier[1])
 		modifier_l(link, modifier, type);

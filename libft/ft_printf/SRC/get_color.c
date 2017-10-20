@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/12 01:07:33 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 16:10:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:36:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 #define FOUND 1
 #define NOT_FOUND 0
 
-static void	add_color(t_ft_printf_env *e, int color_number)
+static void	add_color(t_printf_tools *e, int color_number)
 {
 	t_color		ref;
 
 	if (color_number == T_RED)
-		new_link(e, RED, &(RED[6]), false);
+		new_link(e, RED, &(RED[6]), 0);
 	else if (color_number == T_BLUE)
-		new_link(e, BLUE, &(BLUE[6]), false);
+		new_link(e, BLUE, &(BLUE[6]), 0);
 	else if (color_number == T_GREEN)
-		new_link(e, GREEN, &(GREEN[6]), false);
+		new_link(e, GREEN, &(GREEN[6]), 0);
 	else if (color_number == T_YELLOW)
-		new_link(e, YELLOW, &(YELLOW[6]), false);
+		new_link(e, YELLOW, &(YELLOW[6]), 0);
 	else if (color_number == T_MAGENTA)
-		new_link(e, MAGENTA, &(MAGENTA[6]), false);
+		new_link(e, MAGENTA, &(MAGENTA[6]), 0);
 	else if (color_number == T_CYAN)
-		new_link(e, CYAN, &(CYAN[6]), false);
+		new_link(e, CYAN, &(CYAN[6]), 0);
 	else if (color_number == 6)
-		new_link(e, COLOR_RESET, &(COLOR_RESET[5]), false);
+		new_link(e, COLOR_RESET, &(COLOR_RESET[5]), 0);
 	(void)ref;
 }
 
-static int	is_color(t_ft_printf_env *e, char *str, char *stop)
+static int	is_color(t_printf_tools *e, char *str, char *stop)
 {
 	const char	*t[8] = {"RED",\
 		"GREEN", "YELLOW", "BLUE", "MAGENTA", "CYAN", "EOC", NULL};
@@ -54,7 +54,7 @@ static int	is_color(t_ft_printf_env *e, char *str, char *stop)
 	return (NOT_FOUND);
 }
 
-char		*get_color(t_ft_printf_env *e, char *str)
+char		*get_color(t_printf_tools *e, char *str)
 {
 	char		*stop;
 
@@ -67,7 +67,7 @@ char		*get_color(t_ft_printf_env *e, char *str)
 				return (++stop);
 			else
 			{
-				new_link(e, --str, ++stop, false);
+				new_link(e, --str, ++stop, 0);
 				return (stop);
 			}
 		}

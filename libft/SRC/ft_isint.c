@@ -6,14 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 13:21:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:55:47 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "libft.h"
 
-int		ft_isint(char *str)
+int			ft_isint(char *str)
 {
 	return (INT_MIN <= ft_atol(str) && ft_atol(str) <= INT_MAX);
 }
