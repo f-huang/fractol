@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/04/22 15:56:39 by FannyHuang       ###   ########.fr       */
+/*   Updated: 2017/10/20 17:04:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,84 +14,83 @@
 #include "fract_ol.h"
 #include "libft.h"
 
-#define IMAGE_WIDTH 500
-#define IMAGE_HEIGHT 500
 
-# define COORD_X1 fractal.coord[0]
-# define COORD_X2 fractal.coord[1]
-# define COORD_Y1 fractal.coord[2]
-# define COORD_Y2 fractal.coord[3]
-
-void	fract_ol_put_pixel_img(t_mlx_img *img, int x, int y, int r, int g, int b)
+#include <stdio.h>
+static void	put_pixel_in_fract_ol(t_mlx_img *mlx_img, t_offset offset, double i)
 {
-	x *= 4;
-	if (y >= 0 && y < IMAGE_HEIGHT && x >= 0 && x < img->size_line)
+	t_rgb	rgb;
+
+	ft_bzero(&rgb, sizeof(rgb));
+	if (i == mlx_img->fractal.iteration)
+		rgb = (t_rgb) { .r = 0x0, .g = 0x0, .b = 0x0 };
+	else
 	{
-		img->address[y * img->size_line + x] = b;//((r & 0xff) << 16);
-		// img->address[y * img->size_line + x] = (char)255;
-		x++;
-		img->address[y * img->size_line + x] = g;// ((g & 0xff) << 8);
-		x++;
-		img->address[y * img->size_line + x] = r;//(b & 0xff);
+		if (i >= 200)//#2df909
+			rgb = (t_rgb) { .r = 0xee, .g = 0x58, .b = 0x59 };
+		else if (i > 50 && i < 200)//#3f9630
+			rgb = (t_rgb) { .r = 0x3f, .g = 0x96, .b = 0x30 };
+		else if (i > 5)//#c4f2bc
+			rgb = (t_rgb) { .r = 0xf0, .g = 0xf0, .b = 0xf0 };
+		else
+			rgb = (t_rgb) { .r = 0xce, .g = 0xc3, .b = 0xa7 };
 	}
+	fract_ol_put_pixel_img(mlx_img, offset, rgb);
 }
 
-void	fract_ol_draw_fractal(t_mlx_img *mlx_img)
+static double	define_z_complex(t_complex c, unsigned int max_iterations)
 {
-	double	z_r = 0;
-	double	z_i = 0;
-	double	c_r = 0;
-	double	c_i = 0;
+	double		i;
+	double		tmp_real;
+	t_complex	z;
 
-	double	tmp_r = 0;
-
-	double	i;
-	for (unsigned int x = 0; x < IMAGE_WIDTH; x++)
+	ft_bzero(&z, sizeof(t_complex));
+	i = -1;
+	while (++i < max_iterations\
+		&& z.real * z.real + z.imaginary * z.imaginary < 4.0)
 	{
-		// c_r = 1.5 * (x - IMAGE_WIDTH / 2.0) / (0.5 * IMAGE_WIDTH * mlx_img->fractal.zoom) + mlx_img->COORD_X1 ;
-		c_r = x / mlx_img->fractal.zoom + mlx_img->COORD_X1 ;
-		for (unsigned int y = 0; y < IMAGE_HEIGHT; y++)
-		{
-			// c_i = (y - IMAGE_HEIGHT / 2.0) / (0.5 * IMAGE_HEIGHT * mlx_img->fractal.zoom) + mlx_img->COORD_Y1 ;
-			i = 0;
-			z_r = 0;
-			z_i = 0;
-			c_i = y / mlx_img->fractal.zoom + mlx_img->COORD_Y1;
-			// printf("| %lf |", c_i);
-			while (i < mlx_img->fractal.iteration &&\
-				z_r * z_r + z_i * z_i < 4.0)
-			{
-				tmp_r = z_r;
-				z_r = z_r * z_r - z_i * z_i + c_r;
-				z_i = 2.0 * z_i * tmp_r + c_i;
-				i++;
-			}
+		tmp_real = z.real;
+		z.real = z.real * z.real - z.imaginary * z.imaginary + c.real;
+		z.imaginary = 2.0 * z.imaginary * tmp_real + c.imaginary;
+	}
+	return (i);
+}
 
-			if (i == mlx_img->fractal.iteration)
-				fract_ol_put_pixel_img(mlx_img, x, y, 0x0, 0x0, 0x0);
-			else
-			{
-				if (i >= 200)//#2df909
-				fract_ol_put_pixel_img(mlx_img, x, y, 0xee, 0x58, 0x59);
-				else if (i > 50 && i < 200)//#3f9630
-				fract_ol_put_pixel_img(mlx_img, x, y, 0x3f, 0x96, 0x30);
-				else if (i > 5)//#c4f2bc
-				fract_ol_put_pixel_img(mlx_img, x, y, 0xf0, 0xf0, 0xf0);
-				else
-				fract_ol_put_pixel_img(mlx_img, x, y, 0xce, 0xc3, 0xa7);
-			}
+static void	fract_ol_draw_fractal(t_mlx_img *mlx_img)
+{
+	t_complex	c;
+	t_offset	offset;
+	double		i;
+
+	ft_bzero(&offset, sizeof(t_offset));
+	ft_bzero(&c, sizeof(t_complex));
+	while (offset.x < mlx_img->width)
+	{
+		c.real = offset.x / mlx_img->fractal.zoom + mlx_img->fractal.x;
+		offset.y = 0;
+		while (offset.y < mlx_img->height)
+		{
+			c.imaginary = offset.y / mlx_img->fractal.zoom + mlx_img->fractal.y;
+			i = define_z_complex(c, mlx_img->fractal.iteration);
+			put_pixel_in_fract_ol(mlx_img, offset, i);
+			++offset.y;
 		}
+		++offset.x;
 	}
 }
 
 int		fract_ol_create_image(t_env *e) // 2nd param -> fractal name
 {
-	if (!(e->mlx_img.img = mlx_new_image(e->mlx, IMAGE_WIDTH, IMAGE_HEIGHT)))
+	e->mlx_img.width = IMAGE_WIDTH;
+	e->mlx_img.height = IMAGE_HEIGHT;
+	// e->mlx_img.width = ft_abs(e->mlx_img.fractal.abscissa.max - e->mlx_img.fractal.abscissa.min) * e->mlx_img.fractal.zoom;
+	// e->mlx_img.height = ft_abs(e->mlx_img.fractal.ordinate.max - e->mlx_img.fractal.ordinate.min) * e->mlx_img.fractal.zoom;
+	if (!(e->mlx_img.img = mlx_new_image(e->mlx, (int)e->mlx_img.width, (int)e->mlx_img.height)))
 		return (0);
 	e->mlx_img.address = mlx_get_data_addr(e->mlx_img.img,\
 		&e->mlx_img.bits_per_pixel, &e->mlx_img.size_line, &e->mlx_img.endian);
-		ft_printf("address: %p\n", e->mlx_img.address);
+	ft_printf("address: %p\n", e->mlx_img.address);
 	fract_ol_draw_fractal(&e->mlx_img);
+
 	mlx_put_image_to_window(e->mlx, e->win, e->mlx_img.img, 0, 0);
 	return (1);
 }

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_key_hook.c                                :+:      :+:    :+:   */
+/*   fract_ol_quit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 13:32:28 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/20 10:34:36 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/20 11:34:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "mlx.h"
-#include "fract_ol.h"
 #include "libft.h"
+#include "fract_ol.h"
 
-int		fract_ol_key_hook(int keycode, t_env *e)
+void	fract_ol_quit(t_env *e)
 {
-	static void		((*key_actions[])(t_env *)) = {
-		[ESC] = fract_ol_quit
-	};
-
-	ft_printf("keycode: %i\n", keycode);
-	if (keycode == ESC)
-		key_actions[keycode](e);
-	return (0);
+	mlx_destroy_window(e->mlx, e->win);
+	ft_strdel(&e->mlx_img.address);
+	exit(EXIT_SUCCESS);
 }

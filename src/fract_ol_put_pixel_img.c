@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_key_hook.c                                :+:      :+:    :+:   */
+/*   fract_ol_put_pixel_img.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 13:32:28 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/20 10:45:27 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/20 16:47:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fract_ol.h"
-#include "libft.h"
 
-int		fract_ol_key_hook(int keycode, t_env *e)
+void	fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb rgb)
 {
-	static void		((*key_actions[])(t_env *)) = {
-		[ESC] = fract_ol_quit
-	};
-
-	ft_printf("keycode: %i\n", keycode);
-	if (keycode == ESC)
-		key_actions[keycode](e);
-	return (0);
+	offset.x *= 4;
+	if (offset.y < img->height\
+		&& offset.x < (unsigned int)img->size_line)
+	{
+		img->address[offset.y * img->size_line + offset.x] = rgb.b;//((r & 0xff) << 16);
+		img->address[offset.y * img->size_line + offset.x + 1] = rgb.g;// ((g & 0xff) << 8);
+		img->address[offset.y * img->size_line + offset.x + 2] = rgb.r;//(b & 0xff);
+	}
 }
