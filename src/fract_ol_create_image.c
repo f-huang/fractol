@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 19:54:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/21 10:51:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,20 @@ static void	put_pixel_in_fract_ol(t_mlx_img *mlx_img, t_offset offset, double i)
 static double	define_z_complex(t_complex c, unsigned int max_iterations)
 {
 	double		i;
-	double		tmp_real;
+	double		square_z;
+	double		square_imaginary;
 	t_complex	z;
 
 	ft_bzero(&z, sizeof(t_complex));
 	i = -1;
 	while (++i < max_iterations\
-		&& z.real * z.real + z.imaginary * z.imaginary < 4.0)
+		&& (square_z = z.real * z.real)
+			+ (square_imaginary = z.imaginary * z.imaginary) < 4.0)
 	{
-		tmp_real = z.real;
-		z.real = z.real * z.real - z.imaginary * z.imaginary + c.real;
-		z.imaginary = 2.0 * z.imaginary * tmp_real + c.imaginary;
+		z = (t_complex) {
+			.imaginary = 2.0 * z.imaginary * z.real + c.imaginary,
+			.real = square_z - square_imaginary + c.real
+		};
 	}
 	return (i);
 }
@@ -82,15 +85,11 @@ int		fract_ol_create_image(t_env *e) // 2nd param -> fractal name
 {
 	e->mlx_img.width = IMAGE_WIDTH;
 	e->mlx_img.height = IMAGE_HEIGHT;
-	// e->mlx_img.width = ft_abs(e->mlx_img.fractal.abscissa.max - e->mlx_img.fractal.abscissa.min) * e->mlx_img.fractal.zoom;
-	// e->mlx_img.height = ft_abs(e->mlx_img.fractal.ordinate.max - e->mlx_img.fractal.ordinate.min) * e->mlx_img.fractal.zoom;
 	if (!(e->mlx_img.img = mlx_new_image(e->mlx, (int)e->mlx_img.width, (int)e->mlx_img.height)))
 		return (0);
 	e->mlx_img.address = mlx_get_data_addr(e->mlx_img.img,\
 		&e->mlx_img.bits_per_pixel, &e->mlx_img.size_line, &e->mlx_img.endian);
-	ft_printf("address: %p\n", e->mlx_img.address);
 	fract_ol_draw_fractal(&e->mlx_img);
-
 	mlx_put_image_to_window(e->mlx, e->win, e->mlx_img.img, 0, 0);
 	return (1);
 }

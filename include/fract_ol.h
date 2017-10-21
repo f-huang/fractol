@@ -67,8 +67,6 @@ typedef struct	s_fractal
 	double				zoom;
 	t_range				abscissa;
 	t_range				ordinate;
-	// double				x; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
-	// double				y; /* [0][1] -> (x1, y1)		[2][3] -> (x2, y2) */
 	unsigned int		iteration;
 }				t_fractal;
 
@@ -106,6 +104,7 @@ void				fract_ol_quit(t_env *e);
 
 double				get_distance(double x2, double x1);
 
+void				zoom_in(t_env *e, int x, int y);
 
 #endif
 
