@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/21 11:00:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/21 14:32:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	zoom_in(t_env *e, int x, int y)
 	double	new_width;
 	double	new_height;
 
-	e->mlx_img.fractal.iteration *= 1.1;
-	e->mlx_img.fractal.zoom *= 1.5;
+	e->mlx_img.fractal.iteration += 20;
+	e->mlx_img.fractal.zoom += 200;
 	x_percent_in_win = x / e->mlx_img.width;
 	new_width = e->mlx_img.width / e->mlx_img.fractal.zoom;
 	e->mlx_img.fractal.abscissa.min = x_percent_in_win * get_distance(\

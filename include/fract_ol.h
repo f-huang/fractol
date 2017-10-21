@@ -1,10 +1,12 @@
 #ifndef FRACT_OL_H
 # define FRACT_OL_H
 
+# include <pthread.h>
+
 # define NB_FRACTALS 1
 
-# define IMAGE_WIDTH 900
-# define IMAGE_HEIGHT 900
+# define IMAGE_WIDTH 800
+# define IMAGE_HEIGHT 800
 
 # define MANDELBROT_X1 -2.1
 # define MANDELBROT_X2 0.6
@@ -82,25 +84,37 @@ typedef struct	s_mlx_img
 	int					endian;
 }				t_mlx_img;
 
+typedef struct	s_draw_helper
+{
+	t_offset	offset;
+	t_offset	range;
+	t_mlx_img	*img;
+}				t_draw_helper;
+
 typedef struct	s_env
 {
 	void				*mlx;
 	void				*win;
+	pthread_t			thread[9];
 	t_mlx_img			mlx_img;
 }				t_env;
 
-enum e_fractal_type	fract_ol_name_to_type(const char *name);
-const char			*get_fractal_type_name(enum e_fractal_type type);
 
-void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
+int					fract_ol_error(const char *str);
+void				fract_ol_quit(t_env *e);
+int					init_threads(pthread_t **thread);
+
 
 int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
 int					fract_ol_key_hook(int keycode, t_env *e);
 
-int					fract_ol_error(const char *str);
-int					fract_ol_create_image(t_env *e);
-void				fract_ol_quit(t_env *e);
 
+enum e_fractal_type	fract_ol_name_to_type(const char *name);
+const char			*get_fractal_type_name(enum e_fractal_type type);
+
+int					fract_ol_create_image(t_env *e);
+void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, double i);
+void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
 double				get_distance(double x2, double x1);
 

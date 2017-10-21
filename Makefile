@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 23:26:49 by fhuang            #+#    #+#              #
-#    Updated: 2017/10/19 18:55:24 by fhuang           ###   ########.fr        #
+#    Updated: 2017/10/21 13:09:39 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
 OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
 # OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBFT)$(INCDIR)
-LIBPATH	:=	-L./$(LIBFT)$(LIBDIR) -lft -lftprintf
+LIBPATH	:=	-lpthread -L./$(LIBFT)$(LIBDIR) -lft -lftprintf
 CACHEF	:=	.cache_exists
 # ====================
 
