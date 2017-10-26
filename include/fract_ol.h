@@ -96,6 +96,7 @@ typedef struct	s_env
 	void				*mlx;
 	void				*win;
 	pthread_t			thread[9];
+	pthread_mutex_t		mutex;
 	t_mlx_img			mlx_img;
 }				t_env;
 

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/21 15:21:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/22 21:37:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	*draw_depending_on_range(void *args)
 
 	helper = (t_draw_helper*)args;
 	ft_bzero(&c, sizeof(t_complex));
+	printf("%i\n", helper->range.x);
 	while (helper->offset.x < helper->range.x)
 	{
 		c.real = helper->offset.x / helper->img->fractal.zoom + helper->img->fractal.abscissa.min;
@@ -63,7 +64,7 @@ static void	*draw_depending_on_range(void *args)
 
 static void	fract_ol_draw_fractal(t_env *e)
 {
-	t_draw_helper	helper;
+	t_draw_helper	helper[9];
 	int				i;
 	int				j;
 	unsigned int	tmp;
@@ -73,27 +74,21 @@ static void	fract_ol_draw_fractal(t_env *e)
 	j = 0;
 	while (i < e->mlx_img.width)
 	{
-		helper = (t_draw_helper) {
+		helper[j] = (t_draw_helper) {
 			.img = &e->mlx_img,
 			.offset = (t_offset) { .x = tmp * j, .y = 0 },
 			.range = (t_offset) { .x = (tmp * (j + 1) > e->mlx_img.width ?\
 				e->mlx_img.width : tmp * (j + 1)), .y = e->mlx_img.height }
 		};
-		printf("%u - %u\n", helper.offset.x, helper.offset.y);
-		printf("%u - %u\n----------\n", helper.range.x, helper.range.y);
-		pthread_create(&e->thread[j], NULL, draw_depending_on_range, &helper);
+		pthread_create(&e->thread[j], NULL, draw_depending_on_range, &helper[j]);
 		i += 100;
 		j++;
 	}
-	pthread_join(e->thread[0], NULL);
-	pthread_join(e->thread[1], NULL);
-	pthread_join(e->thread[2], NULL);
-	pthread_join(e->thread[3], NULL);
-	pthread_join(e->thread[4], NULL);
-	pthread_join(e->thread[5], NULL);
-	pthread_join(e->thread[6], NULL);
-	pthread_join(e->thread[7], NULL);
-	pthread_join(e->thread[8], NULL);
+	while (j >= 0)
+	{
+		pthread_join(e->thread[j], NULL);
+		--j;
+	}
 }
 
 int		fract_ol_create_image(t_env *e) // 2nd param -> fractal name

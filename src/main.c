@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/21 14:09:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/22 21:32:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		main(int ac, char **av)
 	if (!(e.win = mlx_new_window(e.mlx, IMAGE_WIDTH, IMAGE_HEIGHT, WINDOW_NAME)))
 		return (-fract_ol_error("Could not create a new window."));
 	e.mlx_img.fractal.type = fract_ol_name_to_type("Mandelbrot");
+	pthread_mutex_init(&e.mutex, NULL);
 
 	fract_ol_init_fractal_param(&e.mlx_img.fractal);
 	if (!fract_ol_create_image(&e))
