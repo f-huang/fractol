@@ -5,8 +5,13 @@
 
 # define NB_FRACTALS 1
 
-# define IMAGE_WIDTH 800
-# define IMAGE_HEIGHT 800
+# define IMAGE_SIZE 644
+
+# define ITERATIONS 100
+# define MAX_ITERATIONS 1500
+# define NB_THREADS 12
+
+# define FPS 20
 
 # define MANDELBROT_X1 -2.1
 # define MANDELBROT_X2 0.6
@@ -51,8 +56,8 @@ typedef struct	s_range
 
 typedef struct	s_complex
 {
-	double		real;
-	double		imaginary;
+	long double		real;
+	long double		imaginary;
 }				t_complex;
 
 typedef struct	s_rgb
@@ -66,10 +71,10 @@ typedef struct	s_fractal
 {
 	enum e_fractal_type	type;
 	t_rgb				color;
-	double				zoom;
+	long double			zoom;
 	t_range				abscissa;
 	t_range				ordinate;
-	unsigned int		iteration;
+	int					iteration;
 }				t_fractal;
 
 typedef struct	s_mlx_img
@@ -95,7 +100,7 @@ typedef struct	s_env
 {
 	void				*mlx;
 	void				*win;
-	pthread_t			thread[9];
+	pthread_t			thread[NB_THREADS];
 	pthread_mutex_t		mutex;
 	t_mlx_img			mlx_img;
 }				t_env;
@@ -114,33 +119,12 @@ enum e_fractal_type	fract_ol_name_to_type(const char *name);
 const char			*get_fractal_type_name(enum e_fractal_type type);
 
 int					fract_ol_create_image(t_env *e);
-void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, double i);
+void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
 double				get_distance(double x2, double x1);
 
-void				zoom_in(t_env *e, int x, int y);
+void				zoom_in(t_env *e, const int x, const int y);
+void				zoom_out(t_env *e, const int x, const int y);
 
 #endif
-
-/*
-
-|x| = |(0.6--2.1)|
-|y| = |(-1.2-1.2)|
-
-0		->	800
-					/ 296.296         => x / coef - 2.1
-0		->	2.7
-(-2.1	->	0.6)
-
-ex:
-	720 / 296 - (x = )2.1 - (tocenter->)2.1 = -1.76
-	720 / 296 - 1.76 -2.1 = - 1.42
-
-Zoom sur 1pt en partic. :
-x1 = x-h
-x2 = x+h
-y1 = y-h
-y2 = y+h
-
-*/
