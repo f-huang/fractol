@@ -6,11 +6,10 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/26 18:35:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/26 23:09:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fract_ol.h"
 #include <stdio.h>
 
@@ -31,16 +30,17 @@ static void	zoom_calculate(t_env *e, const int x, const int y)
 
 	x_percent_in_win = x / e->mlx_img.width;
 	new_width = e->mlx_img.width / e->mlx_img.fractal.zoom;
-	e->mlx_img.fractal.abscissa.min = x_percent_in_win * get_distance(\
-		e->mlx_img.fractal.abscissa.max, e->mlx_img.fractal.abscissa.min) -\
-		ft_abs(e->mlx_img.fractal.abscissa.min) - x_percent_in_win * new_width;
-	e->mlx_img.fractal.abscissa.max = e->mlx_img.fractal.abscissa.min + new_width;
-
 	y_percent_in_win = y / e->mlx_img.height;
 	new_height = e->mlx_img.height / e->mlx_img.fractal.zoom;
+
+	e->mlx_img.fractal.abscissa.min = x_percent_in_win * get_distance(\
+		e->mlx_img.fractal.abscissa.max, e->mlx_img.fractal.abscissa.min) +\
+		e->mlx_img.fractal.abscissa.min - x_percent_in_win * new_width;
+	e->mlx_img.fractal.abscissa.max = e->mlx_img.fractal.abscissa.min + new_width;
+
 	e->mlx_img.fractal.ordinate.min = y_percent_in_win * get_distance(\
-		e->mlx_img.fractal.ordinate.max, e->mlx_img.fractal.ordinate.min) -\
-		ft_abs(e->mlx_img.fractal.ordinate.min) - y_percent_in_win * new_height;
+		e->mlx_img.fractal.ordinate.max, e->mlx_img.fractal.ordinate.min) +\
+		e->mlx_img.fractal.ordinate.min - y_percent_in_win * new_height;
 	e->mlx_img.fractal.ordinate.max = e->mlx_img.fractal.ordinate.min + new_height;
 }
 

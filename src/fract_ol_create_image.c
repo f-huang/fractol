@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/26 20:30:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/26 23:11:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	fract_ol_draw_fractal(t_env *e)
 	int				j;
 	int				nb_loop;
 
-	piece_of_image = e->mlx_img.width / NB_THREADS + ((int)e->mlx_img.width % NB_THREADS ? 1 : 0);
+	if (!piece_of_image)
+		piece_of_image = e->mlx_img.width / NB_THREADS + ((int)e->mlx_img.width % NB_THREADS ? 1 : 0);
 	nb_loop = e->mlx_img.width / piece_of_image + ((int)e->mlx_img.width % piece_of_image ? 1 : 0);
 	j = 0;
 	while (j < nb_loop)
