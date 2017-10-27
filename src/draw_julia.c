@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 11:51:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 13:40:04 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/27 16:40:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void		*draw_julia(void *args)
 {
 	t_draw_helper	*helper;
 	t_complex		z;
-	t_complex		c;
 	int				i;
 
 	helper = (t_draw_helper*)args;
-	ft_bzero(&c, sizeof(t_complex));
 	ft_bzero(&z, sizeof(t_complex));
 	while (helper->offset.x < helper->range.x)
 	{

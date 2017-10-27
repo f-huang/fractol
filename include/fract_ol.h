@@ -18,21 +18,15 @@
 # define MANDELBROT_Y1 -1.2
 # define MANDELBROT_Y2 1.2
 
-# define JULIA_X1 -1.7
-# define JULIA_X2 4.0
-# define JULIA_Y1 -1.4
-# define JULIA_Y2 1.0
+# define JULIA_X1 -1.6
+# define JULIA_X2 2.45
+# define JULIA_Y1 -1.2
+# define JULIA_Y2 0.6
 # define JULIA_INITIAL_REAL -1.0
 # define JULIA_INITIAL_IMAGINARY 0.0
-// 0.285 et 0.01 ;
-// 0.13 et 0.745 ;
-// 0.4 et 0.2 ;
-// -1 et 0 ;
-// 0.5 et 0.5 ;
-// 0.3 et 0.5 (lapin de Julia) ;
-// -0.72 et 0.11 ;//
-// 0.185 et 0.013 //
-// -0.67 et 0.209 //
+
+# define IMAGE_LOCK	(1 << 0)
+
 enum			e_fractal_type
 {
 	MANDELBROT = 0,
@@ -40,6 +34,7 @@ enum			e_fractal_type
 };
 
 enum			e_key_hook {
+	L = 37,
 	ESC = 53,
 	ARROW_LEFT = 123,
 	ARROW_RIGHT = 124,
@@ -119,23 +114,45 @@ typedef struct	s_env
 	pthread_t			thread[NB_THREADS];
 	pthread_mutex_t		mutex;
 	t_mlx_img			mlx_img;
+	int					state;
 }				t_env;
 
+/*
+**	BASIC
+*/
 
 int					fract_ol_error(const char *str);
 void				fract_ol_quit(t_env *e);
 int					init_threads(pthread_t **thread);
 
-
-int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
-int					fract_ol_key_hook(int keycode, t_env *e);
-// int					fract_ol_motion_hook(t_env *e);
-int					fract_ol_motion_hook(int x, int y, t_env *e);
-
-
 enum e_fractal_type	fract_ol_name_to_type(const char *name);
 const char			*get_fractal_type_name(enum e_fractal_type type);
 
+/*
+**	HOOK
+*/
+
+int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
+int					fract_ol_key_hook(int keycode, t_env *e);
+int					fract_ol_motion_hook(int x, int y, t_env *e);
+
+/*
+**	HOOK CALLBACKS
+*/
+
+void				zoom_in(t_env *e, const int x, const int y);
+void				zoom_out(t_env *e, const int x, const int y);
+
+void 				translate_left(t_env *e);
+void 				translate_right(t_env *e);
+void 				translate_up(t_env *e);
+void 				translate_down(t_env *e);
+
+void				lock_image(t_env *e);
+
+/*
+**	DRAW IMAGE
+*/
 int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
@@ -143,16 +160,13 @@ void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 void				*draw_mandelbrot(void *args);
 void				*draw_julia(void *args);
 
+/*
+**	TOOLS
+*/
 
 long long	 		get_timestamp(void);
 double				get_distance(double x2, double x1);
 void				millisleep(int milliseconds);
 
-void				zoom_in(t_env *e, const int x, const int y);
-void				zoom_out(t_env *e, const int x, const int y);
-void 				translate_left(t_env *e);
-void 				translate_right(t_env *e);
-void 				translate_up(t_env *e);
-void 				translate_down(t_env *e);
 
 #endif

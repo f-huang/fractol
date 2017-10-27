@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 14:04:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/27 16:08:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	fract_ol_init_fractal_param(t_fractal *fractal)
 			+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
 	}
 	fractal->iteration = ITERATIONS;
+	printf("%Lf\n", fractal->zoom);
 }
 
 int		main(int ac, char **av)
