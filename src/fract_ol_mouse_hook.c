@@ -6,39 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 21:02:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 11:15:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/27 13:51:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>
-
-#include <stdio.h>
 #include "mlx.h"
 #include "fract_ol.h"
-#include "libft.h"
-
-long long	 get_timestamp(void)
-{
-	struct timespec	spec;
-	long long		ret;
-
-	clock_gettime(CLOCK_REALTIME, &spec);
-	ret = spec.tv_sec * 1000LL + spec.tv_nsec / 1000000LL;
-	return (ret);
-}
-
-void		millisleep(int milliseconds)
-{
-	struct timespec	spec;
-
-	if (milliseconds < 0)
-		return ;
-	spec = (struct timespec) {
-		.tv_sec = milliseconds / 1000,
-		.tv_nsec = (milliseconds % 1000) * 1000000
-	};
-	nanosleep(&spec, NULL);
-}
 
 int		fract_ol_mouse_hook(int button_code, int x, int y, t_env *e)
 {

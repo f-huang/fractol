@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 11:30:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/27 11:30:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fract_ol.h"
 #include <stdio.h>
+
 static int	is_in_keyhook(int keycode)
 {
 	return (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT ||

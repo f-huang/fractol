@@ -3,12 +3,12 @@
 
 # include <pthread.h>
 
-# define NB_FRACTALS 1
+# define NB_FRACTALS 2
 
 # define IMAGE_SIZE 644
 
 # define ITERATIONS 100
-# define MAX_ITERATIONS 1500
+# define MAX_ITERATIONS 700
 # define NB_THREADS 12
 
 # define FPS 20
@@ -18,9 +18,25 @@
 # define MANDELBROT_Y1 -1.2
 # define MANDELBROT_Y2 1.2
 
+# define JULIA_X1 -1.7
+# define JULIA_X2 4.0
+# define JULIA_Y1 -1.4
+# define JULIA_Y2 1.0
+# define JULIA_INITIAL_REAL -1.0
+# define JULIA_INITIAL_IMAGINARY 0.0
+// 0.285 et 0.01 ;
+// 0.13 et 0.745 ;
+// 0.4 et 0.2 ;
+// -1 et 0 ;
+// 0.5 et 0.5 ;
+// 0.3 et 0.5 (lapin de Julia) ;
+// -0.72 et 0.11 ;//
+// 0.185 et 0.013 //
+// -0.67 et 0.209 //
 enum			e_fractal_type
 {
-	MANDELBROT = 0
+	MANDELBROT = 0,
+	JULIA
 };
 
 enum			e_key_hook {
@@ -70,10 +86,10 @@ typedef struct	s_rgb
 typedef struct	s_fractal
 {
 	enum e_fractal_type	type;
-	t_rgb				color;
 	long double			zoom;
 	t_range				abscissa;
 	t_range				ordinate;
+	t_complex			motion_complex;
 	int					iteration;
 }				t_fractal;
 
@@ -82,8 +98,7 @@ typedef struct	s_mlx_img
 	t_fractal			fractal;
 	void				*img;
 	char				*address;
-	double				height;
-	double				width;
+	double				size;
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
@@ -91,9 +106,10 @@ typedef struct	s_mlx_img
 
 typedef struct	s_draw_helper
 {
-	t_offset	offset;
-	t_offset	range;
-	t_mlx_img	*img;
+	t_offset			offset;
+	t_offset			range;
+	t_complex			c;
+	t_mlx_img			*img;
 }				t_draw_helper;
 
 typedef struct	s_env
@@ -113,6 +129,8 @@ int					init_threads(pthread_t **thread);
 
 int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
 int					fract_ol_key_hook(int keycode, t_env *e);
+// int					fract_ol_motion_hook(t_env *e);
+int					fract_ol_motion_hook(int x, int y, t_env *e);
 
 
 enum e_fractal_type	fract_ol_name_to_type(const char *name);
@@ -122,7 +140,13 @@ int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
+void				*draw_mandelbrot(void *args);
+void				*draw_julia(void *args);
+
+
+long long	 		get_timestamp(void);
 double				get_distance(double x2, double x1);
+void				millisleep(int milliseconds);
 
 void				zoom_in(t_env *e, const int x, const int y);
 void				zoom_out(t_env *e, const int x, const int y);

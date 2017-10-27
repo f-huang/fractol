@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_error.c                                   :+:      :+:    :+:   */
+/*   millisleep.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/17 00:11:01 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 13:07:50 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/27 13:51:24 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/27 13:51:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <time.h>
 
-int		fract_ol_error(const char *str)
+void		millisleep(int milliseconds)
 {
-	ft_putendl_fd(str, 2);
-	return (-1);
+	struct timespec	spec;
+
+	if (milliseconds < 0)
+		return ;
+	spec = (struct timespec) {
+		.tv_sec = milliseconds / 1000,
+		.tv_nsec = (milliseconds % 1000) * 1000000
+	};
+	nanosleep(&spec, NULL);
 }

@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 23:26:49 by fhuang            #+#    #+#              #
-#    Updated: 2017/10/26 17:14:05 by fhuang           ###   ########.fr        #
+#    Updated: 2017/10/27 13:14:56 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,10 @@ LIBFT	:=	libft/
 LIBDIR	:=	lib/
 SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
 OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
+# DEPS	:=	$(OBJ:.o=.d)
 # OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBFT)$(INCDIR)
-LIBPATH	:=	-lpthread -L./$(LIBFT)$(LIBDIR) -lft -lftprintf
+LIBPATH	:=	-lpthread -L./$(LIBFT)$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
 # ====================
 
@@ -57,7 +58,7 @@ $(NAME): libft $(OBJ)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c  $< -o $@ $(INC)
 	printf $(BLUE)"|"$(EOC)
 
 $(CACHEF):

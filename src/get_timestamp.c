@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol_error.c                                   :+:      :+:    :+:   */
+/*   get_timestamp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/17 00:11:01 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 13:07:50 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/27 13:50:53 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/27 13:51:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <time.h>
 
-int		fract_ol_error(const char *str)
+long long	 get_timestamp(void)
 {
-	ft_putendl_fd(str, 2);
-	return (-1);
+	struct timespec	spec;
+	long long		ret;
+
+	clock_gettime(CLOCK_REALTIME, &spec);
+	ret = spec.tv_sec * 1000LL + spec.tv_nsec / 1000000LL;
+	return (ret);
 }
