@@ -126,5 +126,9 @@ double				get_distance(double x2, double x1);
 
 void				zoom_in(t_env *e, const int x, const int y);
 void				zoom_out(t_env *e, const int x, const int y);
+void 				translate_left(t_env *e);
+void 				translate_right(t_env *e);
+void 				translate_up(t_env *e);
+void 				translate_down(t_env *e);
 
 #endif

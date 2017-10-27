@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 21:02:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/26 20:30:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/27 11:15:20 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		fract_ol_mouse_hook(int button_code, int x, int y, t_env *e)
 		mlx_destroy_image(e->mlx, e->mlx_img.img);
 		button_actions[button_code](e, x, y);
 		fract_ol_create_image(e);
-		printf("%lld\n", get_timestamp() - start_rendering);
 		millisleep(start_rendering + 1000 / FPS - get_timestamp());
 	}
 	return (0);
