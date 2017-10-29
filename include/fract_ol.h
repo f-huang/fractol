@@ -111,6 +111,7 @@ typedef struct	s_draw_helper
 	t_offset			offset;
 	t_offset			range;
 	t_mlx_img			*img;
+	void				(*f)(struct s_draw_helper*, t_complex, t_complex);
 }				t_draw_helper;
 
 typedef struct	s_env
@@ -161,11 +162,11 @@ void				lock_image(t_env *e);
 int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 
-void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread, enum e_fractal_type);
-void				*draw_mandelbrot(void *args);
-void				*draw_julia(void *args);
-void				*draw_burning_ship(void *args);
-void 				*draw_fern(void *args);
+void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread);
+void				draw_mandelbrot(t_draw_helper *helper, t_complex z, t_complex c);
+void				draw_julia(t_draw_helper *helper, t_complex z, t_complex c);
+void				draw_burning_ship(t_draw_helper *helper, t_complex z, t_complex c);
+void 				draw_fern(t_draw_helper *helper, t_complex z, t_complex c);
 
 /*
 **	TOOLS
