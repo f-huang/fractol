@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/29 17:03:02 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:33:39 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 22:11:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	*draw_image(void *args)
 	return (NULL);
 }
 
-void		draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread)
+void	draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread)
 {
 	static void	((*f[])(t_draw_helper *, t_complex, t_complex)) = {
 		[MANDELBROT] = draw_mandelbrot,
