@@ -18,10 +18,10 @@
 # define MANDELBROT_Y1 -1.2
 # define MANDELBROT_Y2 1.2
 
-# define JULIA_X1 -1.6
-# define JULIA_X2 2.45
-# define JULIA_Y1 -1.2
-# define JULIA_Y2 0.6
+# define JULIA_X1 -1.3
+# define JULIA_X2 2.2
+# define JULIA_Y1 -1.6
+# define JULIA_Y2 0.7
 # define JULIA_INITIAL_REAL -1.0
 # define JULIA_INITIAL_IMAGINARY 0.0
 
@@ -163,9 +163,15 @@ int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 
 void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread);
+
 void				draw_mandelbrot(t_draw_helper *helper, t_complex z, t_complex c);
 void				draw_julia(t_draw_helper *helper, t_complex z, t_complex c);
 void				draw_burning_ship(t_draw_helper *helper, t_complex z, t_complex c);
-void 				draw_fern(t_draw_helper *helper, t_complex z, t_complex c);
 
 #endif
+//BONUS:
+//	-	Color -> todo
+//	-	Deplacements
+//	-	Multi fractals -> todo
+//	-	Lock image + text on image
+//	-	Multi threads
