@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 16:08:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 18:44:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,21 @@ static void	fract_ol_init_fractal_param(t_fractal *fractal)
 	{
 		fractal->abscissa = (t_range) { .min = MANDELBROT_X1, .max = MANDELBROT_X2 };
 		fractal->ordinate = (t_range) { .min = MANDELBROT_Y1, .max = MANDELBROT_Y2 };
-		fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
-			+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
 	}
 	else if (fractal->type == JULIA)
 	{
 		fractal->motion_complex = (t_complex) { .real = JULIA_INITIAL_REAL, .imaginary = JULIA_INITIAL_IMAGINARY };
 		fractal->abscissa = (t_range) { .min = JULIA_X1, .max = JULIA_X2 };;
 		fractal->ordinate = (t_range) { .min = JULIA_Y1, .max = JULIA_Y2 };
-		fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
-			+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
+
 	}
+	else if (fractal->type == BURNING_SHIP)
+	{
+		fractal->abscissa = (t_range) { .min = BURNING_SHIP_X1, .max = BURNING_SHIP_X2 };
+		fractal->ordinate = (t_range) { .min = BURNING_SHIP_Y1, .max = BURNING_SHIP_Y2 };
+	}
+	fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
+		+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
 	fractal->iteration = ITERATIONS;
 	printf("%Lf\n", fractal->zoom);
 }
@@ -53,7 +57,6 @@ int		main(int ac, char **av)
 	if (!(e.win = mlx_new_window(e.mlx, IMAGE_SIZE, IMAGE_SIZE, WINDOW_NAME)))
 		return (-fract_ol_error("Could not create a new window."));
 	e.mlx_img.size = IMAGE_SIZE;
-	pthread_mutex_init(&e.mutex, NULL);
 
 	fract_ol_init_fractal_param(&e.mlx_img.fractal);
 	if (!fract_ol_create_image(&e))

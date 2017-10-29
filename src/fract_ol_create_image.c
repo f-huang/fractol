@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 14:02:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 18:28:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 static void	fract_ol_draw_fractal(t_env *e)
 {
 	static int		piece_of_image = 0;
+	static int		nb_loop = 0;
 	t_draw_helper	helper[NB_THREADS];
 	int				j;
-	int				nb_loop;
 
 	if (!piece_of_image)
 		piece_of_image = e->mlx_img.size / NB_THREADS + ((int)e->mlx_img.size % NB_THREADS ? 1 : 0);
-	nb_loop = e->mlx_img.size / piece_of_image + ((int)e->mlx_img.size % piece_of_image ? 1 : 0);
+	if (!nb_loop)
+		nb_loop = e->mlx_img.size / piece_of_image + ((int)e->mlx_img.size % piece_of_image ? 1 : 0);
 	j = 0;
 	while (j < nb_loop)
 	{
@@ -30,15 +31,10 @@ static void	fract_ol_draw_fractal(t_env *e)
 			.img = &e->mlx_img,
 			.offset = (t_offset) { .x = piece_of_image * j, .y = 0 },
 			.range = (t_offset) { .x = (piece_of_image * (j + 1) > e->mlx_img.size ?\
-				e->mlx_img.size : piece_of_image * (j + 1)), .y = e->mlx_img.size }
+				e->mlx_img.size : piece_of_image * (j + 1)), .y = e->mlx_img.size },
+			.c = e->mlx_img.fractal.motion_complex
 		};
-		if (e->mlx_img.fractal.type == MANDELBROT)
-			pthread_create(&e->thread[j], NULL, draw_mandelbrot, &helper[j]);
-		else if (e->mlx_img.fractal.type == JULIA)
-		{
-			helper[j].c = e->mlx_img.fractal.motion_complex;
-			pthread_create(&e->thread[j], NULL, draw_julia, &helper[j]);
-		}
+		draw_corresponding_fractal(&helper[j], &e->thread[j], e->mlx_img.fractal.type);
 		j++;
 	}
 	while (j >= 0)

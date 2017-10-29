@@ -3,7 +3,7 @@
 
 # include <pthread.h>
 
-# define NB_FRACTALS 2
+# define NB_FRACTALS 3
 
 # define IMAGE_SIZE 644
 
@@ -25,12 +25,18 @@
 # define JULIA_INITIAL_REAL -1.0
 # define JULIA_INITIAL_IMAGINARY 0.0
 
+# define BURNING_SHIP_X1 -2.3
+# define BURNING_SHIP_X2 1
+# define BURNING_SHIP_Y1 -2
+# define BURNING_SHIP_Y2 2
+
 # define IMAGE_LOCK	(1 << 0)
 
 enum			e_fractal_type
 {
 	MANDELBROT = 0,
-	JULIA
+	JULIA,
+	BURNING_SHIP
 };
 
 enum			e_key_hook {
@@ -112,7 +118,6 @@ typedef struct	s_env
 	void				*mlx;
 	void				*win;
 	pthread_t			thread[NB_THREADS];
-	pthread_mutex_t		mutex;
 	t_mlx_img			mlx_img;
 	int					state;
 }				t_env;
@@ -157,8 +162,11 @@ int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
 void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
+void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread, enum e_fractal_type);
 void				*draw_mandelbrot(void *args);
 void				*draw_julia(void *args);
+void				*draw_burning_ship(void *args);
+void 				*draw_fern(void *args);
 
 /*
 **	TOOLS
