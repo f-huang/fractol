@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 16:43:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 21:34:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,8 +205,10 @@ char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
 size_t				ft_nbrlen(int n);
 size_t				ft_nbrlen_base(unsigned long n, int base);
+
 unsigned int		ft_power_pos(unsigned int n, unsigned int p);
 double				ft_abs(double n);
+double				get_distance(double x2, double x1);
 
 /*
 **	MEM FUNCTIONS

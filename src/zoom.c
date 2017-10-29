@@ -6,12 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 16:41:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 21:38:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "fract_ol.h"
-#include <stdio.h>
 
 #define STEP 800
 
