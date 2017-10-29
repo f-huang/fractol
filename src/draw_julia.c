@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 11:51:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 16:40:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 20:52:08 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		*draw_julia(void *args)
 		while (helper->offset.y < helper->range.y)
 		{
 			z.imaginary = helper->offset.y / helper->img->fractal.zoom + helper->img->fractal.ordinate.min;
-			i = define_z_complex(helper->c, z, helper->img->fractal.iteration);
+			i = define_z_complex(helper->img->fractal.motion_complex, z, helper->img->fractal.iteration);
 			put_pixel_in_fractal(helper->img, helper->offset, i);
 			++helper->offset.y;
 		}

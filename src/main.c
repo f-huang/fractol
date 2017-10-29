@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 18:44:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 18:45:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	fract_ol_init_fractal_param(t_fractal *fractal)
 	fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
 		+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
 	fractal->iteration = ITERATIONS;
-	printf("%Lf\n", fractal->zoom);
 }
 
 int		main(int ac, char **av)
@@ -48,6 +47,7 @@ int		main(int ac, char **av)
 	t_env	e;
 
 	ft_bzero(&e, sizeof(t_env));
+	e.mlx_img.size = IMAGE_SIZE;
 	if (ac < 2)
 		return (-fract_ol_error("Not enough parameters"));
 	if ((int)(e.mlx_img.fractal.type = fract_ol_name_to_type(av[1])) == -1)
@@ -56,7 +56,6 @@ int		main(int ac, char **av)
 		return (-fract_ol_error("Could not init mlx."));
 	if (!(e.win = mlx_new_window(e.mlx, IMAGE_SIZE, IMAGE_SIZE, WINDOW_NAME)))
 		return (-fract_ol_error("Could not create a new window."));
-	e.mlx_img.size = IMAGE_SIZE;
 
 	fract_ol_init_fractal_param(&e.mlx_img.fractal);
 	if (!fract_ol_create_image(&e))

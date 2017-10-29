@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 18:28:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 20:51:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	fract_ol_draw_fractal(t_env *e)
 			.offset = (t_offset) { .x = piece_of_image * j, .y = 0 },
 			.range = (t_offset) { .x = (piece_of_image * (j + 1) > e->mlx_img.size ?\
 				e->mlx_img.size : piece_of_image * (j + 1)), .y = e->mlx_img.size },
-			.c = e->mlx_img.fractal.motion_complex
+			// .c = e->mlx_img.fractal.motion_complex
 		};
 		draw_corresponding_fractal(&helper[j], &e->thread[j], e->mlx_img.fractal.type);
 		j++;

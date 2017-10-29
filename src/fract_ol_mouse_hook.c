@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 21:02:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/27 13:51:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 18:47:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ int		fract_ol_mouse_hook(int button_code, int x, int y, t_env *e)
 		[SCROLL_WHEEL_ZOOM_IN] = zoom_in,
 		[SCROLL_WHEEL_ZOOM_OUT] = zoom_out
 	};
-	static long long		start_rendering = 0;
 
 	if (x > 0 && y > 0 && (button_code == SCROLL_WHEEL_ZOOM_IN
 		|| button_code == SCROLL_WHEEL_ZOOM_OUT))
 	{
-		start_rendering = get_timestamp();
 		mlx_clear_window(e->mlx, e->win);
 		mlx_destroy_image(e->mlx, e->mlx_img.img);
 		button_actions[button_code](e, x, y);
 		fract_ol_create_image(e);
-		millisleep(start_rendering + 1000 / FPS - get_timestamp());
 	}
 	return (0);
 }

@@ -5,10 +5,10 @@
 
 # define NB_FRACTALS 3
 
-# define IMAGE_SIZE 644
+# define IMAGE_SIZE 645
 
-# define ITERATIONS 100
-# define MAX_ITERATIONS 700
+# define ITERATIONS 20
+# define MAX_ITERATIONS 500
 # define NB_THREADS 12
 
 # define FPS 20
@@ -61,8 +61,8 @@ enum	 		e_mouse_hook
 
 typedef struct	s_offset
 {
-	unsigned int		x;
-	unsigned int		y;
+	unsigned int	x;
+	unsigned int	y;
 }				t_offset;
 
 typedef struct	s_range
@@ -103,13 +103,13 @@ typedef struct	s_mlx_img
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
+	t_rgb				rgb;
 }				t_mlx_img;
 
 typedef struct	s_draw_helper
 {
 	t_offset			offset;
 	t_offset			range;
-	t_complex			c;
 	t_mlx_img			*img;
 }				t_draw_helper;
 
@@ -160,7 +160,6 @@ void				lock_image(t_env *e);
 */
 int					fract_ol_create_image(t_env *e);
 void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
-void				fract_ol_put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb);
 
 void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread, enum e_fractal_type);
 void				*draw_mandelbrot(void *args);
