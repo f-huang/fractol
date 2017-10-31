@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 23:31:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 18:45:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 23:41:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		main(int ac, char **av)
 		return (-fract_ol_error("Could not init mlx."));
 	if (!(e.win = mlx_new_window(e.mlx, IMAGE_SIZE, IMAGE_SIZE, WINDOW_NAME)))
 		return (-fract_ol_error("Could not create a new window."));
+	e.mlx_img.rgb = (t_rgb) { .r = 0, .g = 50, .b = 250 };
 
 	fract_ol_init_fractal_param(&e.mlx_img.fractal);
 	if (!fract_ol_create_image(&e))

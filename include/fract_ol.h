@@ -40,7 +40,8 @@ enum			e_fractal_type
 };
 
 enum			e_key_hook {
-	L = 37,
+	KEY_L = 37,
+	KEY_C = 8,
 	ESC = 53,
 	ARROW_LEFT = 123,
 	ARROW_RIGHT = 124,
@@ -155,6 +156,7 @@ void 				translate_up(t_env *e);
 void 				translate_down(t_env *e);
 
 void				lock_image(t_env *e);
+void				change_color(t_env *e);
 
 /*
 **	DRAW IMAGE

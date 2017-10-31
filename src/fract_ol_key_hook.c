@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 18:47:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/29 23:25:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 static int	is_in_keyhook(int keycode)
 {
-	return (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT ||
-		keycode == ARROW_UP || keycode == ARROW_DOWN || keycode == L);
+	return (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
+		|| keycode == ARROW_UP || keycode == ARROW_DOWN
+		|| keycode == KEY_L || keycode == KEY_C);
 }
 
 int		fract_ol_key_hook(int keycode, t_env *e)
@@ -28,17 +29,18 @@ int		fract_ol_key_hook(int keycode, t_env *e)
 		[ARROW_RIGHT] = translate_right,
 		[ARROW_UP] = translate_up,
 		[ARROW_DOWN] = translate_down,
-		[L] = lock_image
+		[KEY_L] = lock_image,
+		[KEY_C] = change_color
 	};
 	if (is_in_keyhook(keycode))
 	{
-		if (keycode != ESC && keycode != L)
+		if (keycode != ESC && keycode != KEY_L)
 		{
 			mlx_clear_window(e->mlx, e->win);
 			mlx_destroy_image(e->mlx, e->mlx_img.img);
 		}
 		key_actions[keycode](e);
-		if (keycode != ESC && keycode != L)
+		if (keycode != ESC && keycode != KEY_L)
 			fract_ol_create_image(e);
 	}
 	return (0);
