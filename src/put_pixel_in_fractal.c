@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 13:13:11 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 23:42:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 11:17:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	put_pixel_img(t_mlx_img *img, t_offset offset, t_rgb rgb)
 	(void)rgb;
 }
 
-void		put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i)
+void		put_pixel_in_fractal(t_mlx_img *mlx_img, t_fractal fractal, t_offset offset, int i)
 {
 	t_rgb	rgb;
 
-	if (i == mlx_img->fractal.iteration)
+	if (i == fractal.iteration)
 		rgb = (t_rgb) { .r = 0x0, .g = 0x0, .b = 0x0 };
 	else {
 		rgb = (t_rgb) {

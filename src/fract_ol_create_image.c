@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:28:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 11:57:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	fract_ol_draw_fractal(t_env *e)
 	{
 		helper[j] = (t_draw_helper) {
 			.img = &e->mlx_img,
+			.fractal = e->fractals[e->index],
 			.offset = (t_offset) { .x = piece_of_image * j, .y = 0 },
 			.range = (t_offset) { .x = (piece_of_image * (j + 1) > e->mlx_img.size ?\
 				e->mlx_img.size : piece_of_image * (j + 1)), .y = e->mlx_img.size },
@@ -40,7 +41,7 @@ static void	fract_ol_draw_fractal(t_env *e)
 		pthread_join(e->thread[j--], NULL);
 }
 
-int		fract_ol_create_image(t_env *e) // 2nd param -> fractal name
+int		fract_ol_create_image(t_env *e)
 {
 	if (!(e->mlx_img.img = mlx_new_image(e->mlx, (int)e->mlx_img.size, (int)e->mlx_img.size)))
 		return (0);

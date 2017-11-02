@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:53:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 11:55:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,44 @@ static void	zoom_calculate(t_env *e, const int x, const int y)
 
 	x_percent_in_win = x / e->mlx_img.size;
 	y_percent_in_win = y / e->mlx_img.size;
-	new_size = e->mlx_img.size / e->mlx_img.fractal.zoom;
+	new_size = e->mlx_img.size / e->fractals[e->index].zoom;
 
-	e->mlx_img.fractal.abscissa.min = x_percent_in_win * get_distance(\
-		e->mlx_img.fractal.abscissa.max, e->mlx_img.fractal.abscissa.min) +
-		e->mlx_img.fractal.abscissa.min - x_percent_in_win * new_size;
-	e->mlx_img.fractal.abscissa.max = e->mlx_img.fractal.abscissa.min + new_size;
+	e->fractals[e->index].abscissa.min = x_percent_in_win * get_distance(\
+		e->fractals[e->index].abscissa.max, e->fractals[e->index].abscissa.min) +
+		e->fractals[e->index].abscissa.min - x_percent_in_win * new_size;
+	e->fractals[e->index].abscissa.max = e->fractals[e->index].abscissa.min + new_size;
 
-	e->mlx_img.fractal.ordinate.min = y_percent_in_win * get_distance(\
-		e->mlx_img.fractal.ordinate.max, e->mlx_img.fractal.ordinate.min) +\
-		e->mlx_img.fractal.ordinate.min - y_percent_in_win * new_size;
-	e->mlx_img.fractal.ordinate.max = e->mlx_img.fractal.ordinate.min + new_size;
+	e->fractals[e->index].ordinate.min = y_percent_in_win * get_distance(\
+		e->fractals[e->index].ordinate.max, e->fractals[e->index].ordinate.min) +\
+		e->fractals[e->index].ordinate.min - y_percent_in_win * new_size;
+	e->fractals[e->index].ordinate.max = e->fractals[e->index].ordinate.min + new_size;
 }
 
 void		zoom_in(t_env *e, const int x, const int y)
 {
-	if (e->mlx_img.fractal.zoom < STEP)
+	if (e->fractals[e->index].zoom < STEP)
 	{
-		e->mlx_img.fractal.iteration *= SMALL_ITERATIONS;
-		e->mlx_img.fractal.zoom *= SMALL_ZOOM;
+		e->fractals[e->index].iteration *= SMALL_ITERATIONS;
+		e->fractals[e->index].zoom *= SMALL_ZOOM;
 	}
 	else
 	{
-		if (e->mlx_img.fractal.iteration < MAX_ITERATIONS)
-			e->mlx_img.fractal.iteration *= BIG_ITERATIONS;
-		e->mlx_img.fractal.zoom *= BIG_ZOOM;
+		if (e->fractals[e->index].iteration < MAX_ITERATIONS)
+			e->fractals[e->index].iteration *= BIG_ITERATIONS;
+		e->fractals[e->index].zoom *= BIG_ZOOM;
 	}
 	zoom_calculate(e, x, y);
 }
 
 void		zoom_out(t_env *e, const int x, const int y)
 {
-	if (e->mlx_img.fractal.zoom > 150)
+	if (e->fractals[e->index].zoom > 150)
 	{
-		if (e->mlx_img.fractal.zoom < STEP)
-			e->mlx_img.fractal.zoom /= SMALL_ZOOM;
+		if (e->fractals[e->index].zoom < STEP)
+			e->fractals[e->index].zoom /= SMALL_ZOOM;
 		else
-			e->mlx_img.fractal.zoom /= BIG_ZOOM;
+			e->fractals[e->index].zoom /= BIG_ZOOM;
 	}
-	e->mlx_img.fractal.iteration /= SMALL_ITERATIONS;
+	e->fractals[e->index].iteration /= SMALL_ITERATIONS;
 	zoom_calculate(e, x, y);
 }

@@ -97,7 +97,7 @@ typedef struct	s_fractal
 
 typedef struct	s_mlx_img
 {
-	t_fractal			fractal;
+	// t_fractal			fractal;
 	void				*img;
 	char				*address;
 	double				size;
@@ -112,6 +112,7 @@ typedef struct	s_draw_helper
 	t_offset			offset;
 	t_offset			range;
 	t_mlx_img			*img;
+	t_fractal			fractal;
 	void				(*f)(struct s_draw_helper*, t_complex, t_complex);
 }				t_draw_helper;
 
@@ -121,6 +122,9 @@ typedef struct	s_env
 	void				*win;
 	pthread_t			thread[NB_THREADS];
 	t_mlx_img			mlx_img;
+	int					number_of_fractals;
+	int					index;
+	t_fractal			*fractals;
 	int					state;
 }				t_env;
 
@@ -130,10 +134,11 @@ typedef struct	s_env
 
 int					fract_ol_error(const char *str);
 void				fract_ol_quit(t_env *e);
+int					init(t_env *e, const char **av);
 int					init_threads(pthread_t **thread);
 
-enum e_fractal_type	fract_ol_name_to_type(const char *name);
-const char			*get_fractal_type_name(enum e_fractal_type type);
+enum e_fractal_type	get_fractal_type(const char *name);
+const char			*get_fractal_name(enum e_fractal_type type);
 
 /*
 **	HOOK
@@ -162,7 +167,7 @@ void				change_color(t_env *e);
 **	DRAW IMAGE
 */
 int					fract_ol_create_image(t_env *e);
-void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_offset offset, int i);
+void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_fractal fractal, t_offset offset, int i);
 
 void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread);
 

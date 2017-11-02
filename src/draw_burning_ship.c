@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/29 16:58:19 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:23:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 11:57:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_burning_ship(t_draw_helper *helper, t_complex z, t_complex c)
 	ft_bzero(&z, sizeof(t_complex));
 	ft_memcpy(&z, &c, sizeof(t_complex));
 	i = -1;
-	while (++i < helper->img->fractal.iteration\
+	while (++i < helper->fractal.iteration\
 		&& (square_real = z.real * z.real)
 			+ (square_imaginary = z.imaginary * z.imaginary) < 4.0)
 	{
@@ -31,5 +31,5 @@ void	draw_burning_ship(t_draw_helper *helper, t_complex z, t_complex c)
 			.real = square_real - square_imaginary + c.real
 		};
 	}
-	put_pixel_in_fractal(helper->img, helper->offset, i);
+	put_pixel_in_fractal(helper->img, helper->fractal, helper->offset, i);
 }

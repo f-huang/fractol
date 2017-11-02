@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 11:51:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:32:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 11:57:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	draw_julia(t_draw_helper *helper, t_complex z, t_complex c)
 	long double	square_imaginary;
 
 	i = -1;
-	while (++i < helper->img->fractal.iteration\
+	while (++i < helper->fractal.iteration\
 		&& (square_real = c.real * c.real)
 			+ (square_imaginary = c.imaginary * c.imaginary) < 4.0)
 	{
 		c = (t_complex) {
-			.imaginary = 2.0 * c.imaginary * c.real + helper->img->fractal.motion_complex.imaginary,
-			.real = square_real - square_imaginary + helper->img->fractal.motion_complex.real
+			.imaginary = 2.0 * c.imaginary * c.real + helper->fractal.motion_complex.imaginary,
+			.real = square_real - square_imaginary + helper->fractal.motion_complex.real
 		};
 	}
-	put_pixel_in_fractal(helper->img, helper->offset, i);
+	put_pixel_in_fractal(helper->img, helper->fractal, helper->offset, i);
 	(void)z;
 }
