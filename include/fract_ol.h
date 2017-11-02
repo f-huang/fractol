@@ -42,6 +42,8 @@ enum			e_fractal_type
 enum			e_key_hook {
 	KEY_L = 37,
 	KEY_C = 8,
+	KEY_N = 45,
+	KEY_P = 35,
 	ESC = 53,
 	ARROW_LEFT = 123,
 	ARROW_RIGHT = 124,

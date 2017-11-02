@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 23:25:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 12:03:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,22 @@ static int	is_in_keyhook(int keycode)
 {
 	return (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
 		|| keycode == ARROW_UP || keycode == ARROW_DOWN
-		|| keycode == KEY_L || keycode == KEY_C);
+		|| keycode == KEY_L || keycode == KEY_C || keycode == KEY_N
+		|| keycode == KEY_P);
+}
+
+static void	next_fractal(t_env *e)
+{
+	e->index++;
+	if (e->index == e->number_of_fractals)
+		e->index = 0;
+}
+
+static void	previous_fractal(t_env *e)
+{
+	e->index--;
+	if (e->index < 0)
+		e->index = e->number_of_fractals - 1;
 }
 
 int		fract_ol_key_hook(int keycode, t_env *e)
@@ -30,7 +45,9 @@ int		fract_ol_key_hook(int keycode, t_env *e)
 		[ARROW_UP] = translate_up,
 		[ARROW_DOWN] = translate_down,
 		[KEY_L] = lock_image,
-		[KEY_C] = change_color
+		[KEY_C] = change_color,
+		[KEY_N] = next_fractal,
+		[KEY_P] = previous_fractal
 	};
 	if (is_in_keyhook(keycode))
 	{
