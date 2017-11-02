@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 17:16:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:01:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # define BURNING_SHIP_Y2 2
 
 # define IMAGE_LOCK	(1 << 0)
-
 
 enum				e_fractal_type
 {
@@ -162,7 +161,6 @@ typedef struct		s_env
 **	BASIC
 */
 
-int					fract_ol_error(const char *str);
 void				fract_ol_quit(t_env *e);
 int					init(t_env *e, const char **av);
 void				init_fractal_parameters(t_fractal *fractal);

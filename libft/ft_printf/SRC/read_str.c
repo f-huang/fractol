@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 13:32:13 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 14:36:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:03:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char		*parse_format(t_printf_tools *e, char *str)
 int				read_str(t_printf_tools *e, char *str)
 {
 	char	*ptr;
-	int	boo;
+	int		boo;
 	char	*tmp;
 
 	ptr = str;

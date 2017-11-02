@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 11:46:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/19 11:50:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:03:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			transform_for_numbers(t_print *link)
 	char		*ret;
 	int			len;
 	int			base;
-	int		neg;
+	int			neg;
 
 	ret = NULL;
 	base = 10;

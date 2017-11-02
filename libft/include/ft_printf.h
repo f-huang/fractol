@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 23:13:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 14:38:37 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:03:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct			s_print
 	t_var				u_var;
 	t_types				e_types;
 	char				c;
-	int				flags[5];
+	int					flags[5];
 	int					len;
 	int					width;
 	int					precision;
@@ -147,7 +147,8 @@ void					destroy_env(t_printf_tools *e);
 */
 
 void					add_link(t_printf_tools *e, t_print *new, int arg);
-int						new_link(t_printf_tools *e, char *str, char *type, int arg);
+int						new_link(
+							t_printf_tools *e, char *str, char *type, int arg);
 
 /*
  **	PARSE FORMAT

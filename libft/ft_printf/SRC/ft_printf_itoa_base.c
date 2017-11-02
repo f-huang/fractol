@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:16:47 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/19 11:46:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:04:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_printf_itoa_base(int n, int base, int is_uin)
 	char				*ret;
 	unsigned int		uin;
 	int					len;
-	int				neg;
+	int					neg;
 
 	neg = (base == 10 && n < 0) ? 1 : 0;
 	neg && is_uin == 0 ? ABS(n) : 1;

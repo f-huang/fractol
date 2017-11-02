@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/04 13:30:54 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/20 14:36:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:04:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			ft_printf(const char *format, ...)
 {
-	t_printf_tools		e;
-	int			len;
+	t_printf_tools	e;
+	int				len;
 
 	init_env(&e);
 	va_start(e.ap, format);
@@ -30,8 +30,8 @@ int			ft_printf(const char *format, ...)
 
 int			ft_printf_fd(int fd, const char *format, ...)
 {
-	t_printf_tools		e;
-	int			len;
+	t_printf_tools	e;
+	int				len;
 
 	init_env(&e);
 	va_start(e.ap, format);

@@ -6,11 +6,10 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 13:12:26 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:05:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 17:34:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "mlx.h"
 #include "fract_ol.h"
 

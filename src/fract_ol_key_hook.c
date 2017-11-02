@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 17:16:50 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 17:23:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,15 @@ int			fract_ol_key_hook(int keycode, t_env *e)
 		[KEY_R] = reset_parameters
 	};
 
+	keycode == KEY_L ? key_actions[keycode](e) : 0;
 	if (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
-		|| keycode == ARROW_UP || keycode == ARROW_DOWN
-		|| keycode == KEY_L || keycode == KEY_C || keycode == KEY_N
-		|| keycode == KEY_P || keycode == KEY_R)
+		|| keycode == ARROW_UP || keycode == ARROW_DOWN || keycode == KEY_C
+		|| keycode == KEY_N || keycode == KEY_P || keycode == KEY_R)
 	{
-		if (keycode != ESC && keycode != KEY_L)
-		{
-			mlx_clear_window(e->mlx, e->win);
-			mlx_destroy_image(e->mlx, e->mlx_img.img);
-		}
+		mlx_clear_window(e->mlx, e->win);
+		mlx_destroy_image(e->mlx, e->mlx_img.img);
 		key_actions[keycode](e);
-		if (keycode != ESC && keycode != KEY_L)
-			fract_ol_create_image(e);
+		fract_ol_create_image(e);
 	}
 	return (0);
 }

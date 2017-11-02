@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 13:40:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/19 11:46:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:04:08 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_lltoa_base(long long n, int base, int is_uin)
 	char				*ret;
 	unsigned long long	uin;
 	int					len;
-	int				neg;
+	int					neg;
 
 	neg = (base == 10 && n < 0) ? 1 : 0;
 	neg && is_uin == 0 ? ABS(n) : 1;

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 13:40:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/19 11:46:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:04:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_ctoa_base(char n, int base, int is_uin, int *is_neg)
 	char				*ret;
 	unsigned char		uin;
 	int					len;
-	int				neg;
+	int					neg;
 
 	ft_strcpy(pattern, "0123456789abcdef");
 	neg = (base == 10 && n < 0) ? 1 : 0;
