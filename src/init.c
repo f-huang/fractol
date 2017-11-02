@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 10:23:32 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 11:09:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:14:41 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,39 +61,44 @@ static void	init_fractal_parameters(t_fractal *fractal)
 {
 	if (fractal->type == MANDELBROT)
 	{
-		fractal->abscissa = (t_range) { .min = MANDELBROT_X1, .max = MANDELBROT_X2 };
-		fractal->ordinate = (t_range) { .min = MANDELBROT_Y1, .max = MANDELBROT_Y2 };
+		fractal->abscissa = (t_range) {
+			.min = MANDELBROT_X1, .max = MANDELBROT_X2 };
+		fractal->ordinate = (t_range) {
+			.min = MANDELBROT_Y1, .max = MANDELBROT_Y2 };
 	}
 	else if (fractal->type == JULIA)
 	{
-		fractal->motion_complex = (t_complex) { .real = JULIA_INITIAL_REAL, .imaginary = JULIA_INITIAL_IMAGINARY };
-		fractal->abscissa = (t_range) { .min = JULIA_X1, .max = JULIA_X2 };;
+		fractal->motion_complex = (t_complex) {
+			.real = JULIA_INITIAL_REAL, .imaginary = JULIA_INITIAL_IMAGINARY };
+		fractal->abscissa = (t_range) { .min = JULIA_X1, .max = JULIA_X2 };
 		fractal->ordinate = (t_range) { .min = JULIA_Y1, .max = JULIA_Y2 };
-
 	}
 	else if (fractal->type == BURNING_SHIP)
 	{
-		fractal->abscissa = (t_range) { .min = BURNING_SHIP_X1, .max = BURNING_SHIP_X2 };
-		fractal->ordinate = (t_range) { .min = BURNING_SHIP_Y1, .max = BURNING_SHIP_Y2 };
+		fractal->abscissa = (t_range) {
+			.min = BURNING_SHIP_X1, .max = BURNING_SHIP_X2 };
+		fractal->ordinate = (t_range) {
+			.min = BURNING_SHIP_Y1, .max = BURNING_SHIP_Y2 };
 	}
-	fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max, fractal->ordinate.min)\
-		+ IMAGE_SIZE / get_distance(fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
+	fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max,
+		fractal->ordinate.min) + IMAGE_SIZE / get_distance(
+		fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
 	fractal->iteration = ITERATIONS;
 }
 
-int		init(t_env *e, const char **av)
+int			init(t_env *e, const char **av)
 {
 	int		i;
 	int		j;
 
-	if ((e->number_of_fractals = get_number_of_fractals(av)) == -1)
-		return (0);
-	if (!(e->fractals = ft_memalloc(sizeof(t_fractal) * (e->number_of_fractals))))
+	if ((e->number_of_fractals = get_number_of_fractals(av)) == -1 ||
+		!(e->fractals =
+			ft_memalloc(sizeof(t_fractal) * (e->number_of_fractals))))
 		return (0);
 	e->mlx_img.size = IMAGE_SIZE;
-	i = 1;
+	i = 0;
 	j = 0;
-	while (av[i] && j < e->number_of_fractals)
+	while (av[++i] && j < e->number_of_fractals)
 	{
 		e->fractals[j].type = get_fractal_type(av[i]);
 		if (!is_type_already_present(e->fractals, j))
@@ -101,8 +106,11 @@ int		init(t_env *e, const char **av)
 			init_fractal_parameters(e->fractals + j);
 			++j;
 		}
-		++i;
 	}
 	e->mlx_img.rgb = (t_rgb) { .r = 50, .g = 50, .b = 50 };
+	e->screen_cut_size = e->mlx_img.size / NB_THREADS +\
+		((int)e->mlx_img.size % NB_THREADS ? 1 : 0);
+	e->nb_screen_cut = e->mlx_img.size / e->screen_cut_size +\
+		((int)e->mlx_img.size % e->screen_cut_size ? 1 : 0);
 	return (1);
 }

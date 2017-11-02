@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 13:12:26 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 11:59:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:05:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	fract_ol_motion_hook(int x, int y, t_env *e)
 
 	if (e->fractals[e->index].type != JULIA || e->state & IMAGE_LOCK)
 		return (0);
-
 	mlx_clear_window(e->mlx, e->win);
-	mlx_destroy_image(e->mlx, e->mlx_img.img);x_percent_in_win = x / e->mlx_img.size;
+	mlx_destroy_image(e->mlx, e->mlx_img.img);
+	x_percent_in_win = x / e->mlx_img.size;
 	y_percent_in_win = y / e->mlx_img.size;
 	e->fractals[e->index].motion_complex = (t_complex) {
 		.real = x_percent_in_win,

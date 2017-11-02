@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 11:57:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:13:02 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,33 @@
 
 static void	fract_ol_draw_fractal(t_env *e)
 {
-	static int		piece_of_image = 0;
-	static int		nb_loop = 0;
 	t_draw_helper	helper[NB_THREADS];
+	unsigned int	tmp_x;
 	int				j;
 
-	if (!piece_of_image)
-		piece_of_image = e->mlx_img.size / NB_THREADS + ((int)e->mlx_img.size % NB_THREADS ? 1 : 0);
-	if (!nb_loop)
-		nb_loop = e->mlx_img.size / piece_of_image + ((int)e->mlx_img.size % piece_of_image ? 1 : 0);
-	j = 0;
-	while (j < nb_loop)
+	j = -1;
+	while (++j < e->nb_screen_cut)
 	{
+		tmp_x = e->screen_cut_size * (j + 1);
 		helper[j] = (t_draw_helper) {
 			.img = &e->mlx_img,
 			.fractal = e->fractals[e->index],
-			.offset = (t_offset) { .x = piece_of_image * j, .y = 0 },
-			.range = (t_offset) { .x = (piece_of_image * (j + 1) > e->mlx_img.size ?\
-				e->mlx_img.size : piece_of_image * (j + 1)), .y = e->mlx_img.size },
+			.offset = (t_offset) { .x = e->screen_cut_size * j, .y = 0 },
+			.range = (t_offset) {
+				.x = (tmp_x > e->mlx_img.size ? e->mlx_img.size : tmp_x),
+				.y = e->mlx_img.size
+			},
 		};
 		draw_corresponding_fractal(&helper[j], &e->thread[j]);
-		j++;
 	}
 	while (j >= 0)
 		pthread_join(e->thread[j--], NULL);
 }
 
-int		fract_ol_create_image(t_env *e)
+int			fract_ol_create_image(t_env *e)
 {
-	if (!(e->mlx_img.img = mlx_new_image(e->mlx, (int)e->mlx_img.size, (int)e->mlx_img.size)))
+	if (!(e->mlx_img.img = mlx_new_image(
+		e->mlx, (int)e->mlx_img.size, (int)e->mlx_img.size)))
 		return (0);
 	e->mlx_img.address = mlx_get_data_addr(e->mlx_img.img,\
 		&e->mlx_img.bits_per_pixel, &e->mlx_img.size_line, &e->mlx_img.endian);

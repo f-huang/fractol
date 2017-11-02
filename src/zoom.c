@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 11:55:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:19:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ static void	zoom_calculate(t_env *e, const int x, const int y)
 	x_percent_in_win = x / e->mlx_img.size;
 	y_percent_in_win = y / e->mlx_img.size;
 	new_size = e->mlx_img.size / e->fractals[e->index].zoom;
-
 	e->fractals[e->index].abscissa.min = x_percent_in_win * get_distance(\
-		e->fractals[e->index].abscissa.max, e->fractals[e->index].abscissa.min) +
-		e->fractals[e->index].abscissa.min - x_percent_in_win * new_size;
-	e->fractals[e->index].abscissa.max = e->fractals[e->index].abscissa.min + new_size;
-
+		e->fractals[e->index].abscissa.max, e->fractals[e->index].abscissa.min)
+		+ e->fractals[e->index].abscissa.min - x_percent_in_win * new_size;
+	e->fractals[e->index].abscissa.max =
+		e->fractals[e->index].abscissa.min + new_size;
 	e->fractals[e->index].ordinate.min = y_percent_in_win * get_distance(\
-		e->fractals[e->index].ordinate.max, e->fractals[e->index].ordinate.min) +\
-		e->fractals[e->index].ordinate.min - y_percent_in_win * new_size;
-	e->fractals[e->index].ordinate.max = e->fractals[e->index].ordinate.min + new_size;
+		e->fractals[e->index].ordinate.max, e->fractals[e->index].ordinate.min)
+		+ e->fractals[e->index].ordinate.min - y_percent_in_win * new_size;
+	e->fractals[e->index].ordinate.max =
+		e->fractals[e->index].ordinate.min + new_size;
 }
 
 void		zoom_in(t_env *e, const int x, const int y)

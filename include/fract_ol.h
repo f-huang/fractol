@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fract_ol.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
+/*   Updated: 2017/11/02 14:09:47 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACT_OL_H
 # define FRACT_OL_H
 
@@ -32,14 +44,15 @@
 
 # define IMAGE_LOCK	(1 << 0)
 
-enum			e_fractal_type
+enum				e_fractal_type
 {
 	MANDELBROT = 0,
 	JULIA,
 	BURNING_SHIP
 };
 
-enum			e_key_hook {
+enum				e_key_hook
+{
 	KEY_L = 37,
 	KEY_C = 8,
 	KEY_N = 45,
@@ -51,7 +64,7 @@ enum			e_key_hook {
 	ARROW_UP = 126
 };
 
-enum	 		e_mouse_hook
+enum				e_mouse_hook
 {
 	LEFT_CLICK = 1,
 	RIGHT_CLICK,
@@ -62,32 +75,32 @@ enum	 		e_mouse_hook
 	SCROLL_WHEEL_RIGHT
 };
 
-typedef struct	s_offset
+typedef struct		s_offset
 {
-	unsigned int	x;
-	unsigned int	y;
-}				t_offset;
+	unsigned int		x;
+	unsigned int		y;
+}					t_offset;
 
-typedef struct	s_range
+typedef struct		s_range
 {
-	double			min;
-	double			max;
-}				t_range;
+	double				min;
+	double				max;
+}					t_range;
 
-typedef struct	s_complex
+typedef struct		s_complex
 {
-	long double		real;
-	long double		imaginary;
-}				t_complex;
+	long double			real;
+	long double			imaginary;
+}					t_complex;
 
-typedef struct	s_rgb
+typedef struct		s_rgb
 {
 	int					r;
 	int					g;
 	int					b;
-}				t_rgb;
+}					t_rgb;
 
-typedef struct	s_fractal
+typedef struct		s_fractal
 {
 	enum e_fractal_type	type;
 	long double			zoom;
@@ -95,11 +108,10 @@ typedef struct	s_fractal
 	t_range				ordinate;
 	t_complex			motion_complex;
 	int					iteration;
-}				t_fractal;
+}					t_fractal;
 
-typedef struct	s_mlx_img
+typedef struct		s_mlx_img
 {
-	// t_fractal			fractal;
 	void				*img;
 	char				*address;
 	double				size;
@@ -107,18 +119,18 @@ typedef struct	s_mlx_img
 	int					size_line;
 	int					endian;
 	t_rgb				rgb;
-}				t_mlx_img;
+}					t_mlx_img;
 
-typedef struct	s_draw_helper
+typedef struct		s_draw_helper
 {
 	t_offset			offset;
 	t_offset			range;
 	t_mlx_img			*img;
 	t_fractal			fractal;
 	void				(*f)(struct s_draw_helper*, t_complex, t_complex);
-}				t_draw_helper;
+}					t_draw_helper;
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	void				*mlx;
 	void				*win;
@@ -126,9 +138,11 @@ typedef struct	s_env
 	t_mlx_img			mlx_img;
 	int					number_of_fractals;
 	int					index;
+	int					screen_cut_size;
+	int					nb_screen_cut;
 	t_fractal			*fractals;
 	int					state;
-}				t_env;
+}					t_env;
 
 /*
 **	BASIC
@@ -146,7 +160,8 @@ const char			*get_fractal_name(enum e_fractal_type type);
 **	HOOK
 */
 
-int					fract_ol_mouse_hook(int button_code, int x, int y, t_env *e);
+int					fract_ol_mouse_hook(
+						int button_code, int x, int y, t_env *e);
 int					fract_ol_key_hook(int keycode, t_env *e);
 int					fract_ol_motion_hook(int x, int y, t_env *e);
 
@@ -157,30 +172,38 @@ int					fract_ol_motion_hook(int x, int y, t_env *e);
 void				zoom_in(t_env *e, const int x, const int y);
 void				zoom_out(t_env *e, const int x, const int y);
 
-void 				translate_left(t_env *e);
-void 				translate_right(t_env *e);
-void 				translate_up(t_env *e);
-void 				translate_down(t_env *e);
+void				translate_left(t_env *e);
+void				translate_right(t_env *e);
+void				translate_up(t_env *e);
+void				translate_down(t_env *e);
 
-void				lock_image(t_env *e);
 void				change_color(t_env *e);
 
 /*
 **	DRAW IMAGE
 */
+
 int					fract_ol_create_image(t_env *e);
-void				put_pixel_in_fractal(t_mlx_img *mlx_img, t_fractal fractal, t_offset offset, int i);
+void				put_pixel_in_fractal(
+						t_mlx_img *mlx_img, t_fractal fractal,
+						t_offset offset, int i);
 
-void				draw_corresponding_fractal(t_draw_helper *helper, pthread_t *thread);
+void				draw_corresponding_fractal(
+						t_draw_helper *helper, pthread_t *thread);
 
-void				draw_mandelbrot(t_draw_helper *helper, t_complex z, t_complex c);
+void				draw_mandelbrot(
+						t_draw_helper *helper, t_complex z, t_complex c);
 void				draw_julia(t_draw_helper *helper, t_complex z, t_complex c);
-void				draw_burning_ship(t_draw_helper *helper, t_complex z, t_complex c);
+void				draw_burning_ship(
+						t_draw_helper *helper, t_complex z, t_complex c);
 
 #endif
-//BONUS:
-//	-	Color -> todo
-//	-	Deplacements
-//	-	Multi fractals -> todo
-//	-	Lock image + text on image
-//	-	Multi threads
+
+/*
+** BONUS:
+** 	-	Color -> todo
+** 	-	Deplacements
+** 	-	Multi fractals
+** 	-	Lock image + text on image
+** 	-	Multi threads
+*/

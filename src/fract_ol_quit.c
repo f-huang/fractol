@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 10:34:36 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 17:47:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 13:49:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void	fract_ol_quit(t_env *e)
 {
+	ft_memdel((void**)&e->fractals);
 	mlx_destroy_window(e->mlx, e->win);
 	exit(EXIT_SUCCESS);
 }
