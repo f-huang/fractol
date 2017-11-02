@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:09:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:38:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,20 @@
 
 # define IMAGE_LOCK	(1 << 0)
 
+
 enum				e_fractal_type
 {
 	MANDELBROT = 0,
 	JULIA,
 	BURNING_SHIP
+};
+
+enum				e_fractal_color
+{
+	F_BW,
+	F_RED,
+	F_GREEN,
+	F_BLUE
 };
 
 enum				e_key_hook
@@ -77,71 +86,72 @@ enum				e_mouse_hook
 
 typedef struct		s_offset
 {
-	unsigned int		x;
-	unsigned int		y;
+	unsigned int			x;
+	unsigned int			y;
 }					t_offset;
 
 typedef struct		s_range
 {
-	double				min;
-	double				max;
+	double					min;
+	double					max;
 }					t_range;
 
 typedef struct		s_complex
 {
-	long double			real;
-	long double			imaginary;
+	long double				real;
+	long double				imaginary;
 }					t_complex;
 
 typedef struct		s_rgb
 {
-	int					r;
-	int					g;
-	int					b;
+	int						r;
+	int						g;
+	int						b;
 }					t_rgb;
 
 typedef struct		s_fractal
 {
-	enum e_fractal_type	type;
-	long double			zoom;
-	t_range				abscissa;
-	t_range				ordinate;
-	t_complex			motion_complex;
-	int					iteration;
+	enum e_fractal_type		type;
+	long double				zoom;
+	t_range					abscissa;
+	t_range					ordinate;
+	t_complex				motion_complex;
+	int						iteration;
 }					t_fractal;
 
 typedef struct		s_mlx_img
 {
-	void				*img;
-	char				*address;
-	double				size;
-	int					bits_per_pixel;
-	int					size_line;
-	int					endian;
-	t_rgb				rgb;
+	void					*img;
+	char					*address;
+	double					size;
+	int						bits_per_pixel;
+	int						size_line;
+	int						endian;
+	t_rgb					rgb;
+	enum e_fractal_color	color;
 }					t_mlx_img;
 
 typedef struct		s_draw_helper
 {
-	t_offset			offset;
-	t_offset			range;
-	t_mlx_img			*img;
-	t_fractal			fractal;
-	void				(*f)(struct s_draw_helper*, t_complex, t_complex);
+	t_offset				offset;
+	t_offset				range;
+	t_mlx_img				*img;
+	t_fractal				fractal;
+	void					(*f)(struct s_draw_helper*, t_complex, t_complex);
 }					t_draw_helper;
 
 typedef struct		s_env
 {
-	void				*mlx;
-	void				*win;
-	pthread_t			thread[NB_THREADS];
-	t_mlx_img			mlx_img;
-	int					number_of_fractals;
-	int					index;
-	int					screen_cut_size;
-	int					nb_screen_cut;
-	t_fractal			*fractals;
-	int					state;
+	void					*mlx;
+	void					*win;
+	pthread_t				thread[NB_THREADS];
+	t_mlx_img				mlx_img;
+	int						number_of_fractals;
+	int						index;
+	int						screen_cut_size;
+	int						nb_screen_cut;
+	t_fractal				*fractals;
+	int						state;
 }					t_env;
 
 /*

@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 16:52:41 by fhuang            #+#    #+#              #
-#    Updated: 2017/10/27 13:06:26 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/02 14:37:25 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ $(NAME): $(OBJ) $(SRC)
 	@mkdir -p $(LIB_PATH)
 	@ar rc $(EXEC) $(OBJ)
 	@ranlib $(EXEC)
-	# @make -C $(PRINTF_PATH)
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
@@ -48,11 +47,9 @@ $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf $(OBJ_PATH)
-	# @make clean -C $(PRINTF_PATH)
 
 fclean: clean
 	@rm -rf $(EXEC)
 	@rm -rf $(LIB_PATH)
-	# @make fclean -C $(PRINTF_PATH)
 
 re: fclean all

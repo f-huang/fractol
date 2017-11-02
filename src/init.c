@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 10:23:32 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:14:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:40:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ int			init(t_env *e, const char **av)
 	int		j;
 
 	if ((e->number_of_fractals = get_number_of_fractals(av)) == -1 ||
-		!(e->fractals =
-			ft_memalloc(sizeof(t_fractal) * (e->number_of_fractals))))
+	!(e->fractals = ft_memalloc(sizeof(t_fractal) * (e->number_of_fractals))))
 		return (0);
 	e->mlx_img.size = IMAGE_SIZE;
 	i = 0;
@@ -107,7 +106,8 @@ int			init(t_env *e, const char **av)
 			++j;
 		}
 	}
-	e->mlx_img.rgb = (t_rgb) { .r = 50, .g = 50, .b = 50 };
+	e->mlx_img.rgb = (t_rgb) { .r = 10, .g = 10, .b = 10 };
+	e->mlx_img.color = F_BW;
 	e->screen_cut_size = e->mlx_img.size / NB_THREADS +\
 		((int)e->mlx_img.size % NB_THREADS ? 1 : 0);
 	e->nb_screen_cut = e->mlx_img.size / e->screen_cut_size +\
