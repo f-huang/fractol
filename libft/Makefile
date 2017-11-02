@@ -6,50 +6,67 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 16:52:41 by fhuang            #+#    #+#              #
-#    Updated: 2017/11/02 14:37:25 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/02 19:54:33 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+# ===== Editable =====
+LIBDIR	:=	lib/
+NAME	:=	$(addprefix $(LIBDIR), libft.a)
+# ====================
 
-NAME = libft.a
+# ===== Standard =====
+CC		:=	clang -pipe
+CFLAGS	:=	-Wall -Wextra -Werror -g3
+SRCDIR	:=	src/
+OBJDIR	:=	obj/
+INCDIR	:=	include/
+SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
+OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
+INC		:=	-I./$(INCDIR)
+PRINTF	:= ./ft_printf
+CACHEF	:=	.cache_exists
+# ====================
 
-CFLAGS = -c -g3 -Wall -Wextra -Werror
+# ====== Colors ======
+CLEAR		= "\033[2K"
+UP			= "\033[A"
+EOC			= "\033[0;0m"
+BLACK		= "\033[0;30m"
+RED			= "\033[0;31m"
+GREEN		= "\033[0;32m"
+YELLOW		= "\033[0;33m"
+BLUE		= "\033[0;34m"
+PURPLE		= "\033[0;35m"
+CYAN		= "\033[0;36m"
+WHITE		= "\033[0;37m"
+# ====================
 
-SRC_PATH = ./SRC/
-SRC_NAME = $(shell ls SRC)
-SRC = $(addprefix $(SRC_PATH), $(SCR_NAME))
-
-OBJ_PATH = ./OBJ/
-OBJ_NAME = $(SRC_NAME:%.c=%.o)
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-
-PRINTF_PATH = ./ft_printf
-INCLUDE_PATH = -I ./include/
-LIB_PATH = ./lib/
-
-EXEC = $(addprefix $(LIB_PATH), $(NAME))
+EXEC			:= $(addprefix $(LIBDIR), $(NAME))
+CACHEF			:=	.cache_exists
 
 .PHONY: clean fclean re all
+.SILENT:
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(SRC)
+$(NAME): $(OBJ)
 	@echo "\033[32m" "-> Libft" "\033[0m"
-	@mkdir -p $(LIB_PATH)
-	@ar rc $(EXEC) $(OBJ)
-	@ranlib $(EXEC)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-$(OBJ_PATH)%.o : $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(INCLUDE_PATH) $(CFLAGS) -c $< -o $@
+$(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
+	$(CC) $(CFLAGS) -c  $< -o $@ $(INC)
+
+$(CACHEF):
+	test -d $(OBJDIR) || mkdir $(OBJDIR)
+	test -d $(LIBDIR) || mkdir $(LIBDIR)
+	test -d $(CACHEF) || touch $(CACHEF)
 
 clean:
-	@rm -rf $(OBJ)
-	@rm -rf $(OBJ_PATH)
+	rm -rf $(OBJDIR) $(CACHEF)
 
 fclean: clean
-	@rm -rf $(EXEC)
-	@rm -rf $(LIB_PATH)
+	rm -f $(NAME)
 
 re: fclean all

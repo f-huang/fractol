@@ -6,55 +6,68 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/10/28 17:37:04 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/02 19:59:24 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+# ===== Editable =====
+LIBFT	:=	../
+LIBDIR	:=	$(LIBFT)lib/
+NAME	:=	$(addprefix $(LIBDIR), libftprintf.a)
+# ====================
 
-CC = gcc
+# ===== Standard =====
+CC		:=	clang -pipe
+CFLAGS	:=	-Wall -Wextra -Werror -g3
+SRCDIR	:=	src/
+OBJDIR	:=	obj/
+INCDIR	:=	../include/
+SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
+OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
+INC		:=	-I./$(INCDIR)
+LIBPATH	:=	-L./$(LIBDIR) -lft
+CACHEF	:=	.cache_exists
+# ====================
 
-CFLAGS = -g -Wall -Werror -Wextra
+# ====== Colors ======
+CLEAR		= "\033[2K"
+UP			= "\033[A"
+EOC			= "\033[0;0m"
+BLACK		= "\033[0;30m"
+RED			= "\033[0;31m"
+GREEN		= "\033[0;32m"
+YELLOW		= "\033[0;33m"
+BLUE		= "\033[0;34m"
+PURPLE		= "\033[0;35m"
+CYAN		= "\033[0;36m"
+WHITE		= "\033[0;37m"
+# ====================
 
-SRC_PATH = ./SRC/
-
-SRC_NAME = $(shell ls SRC)
-
-SRC = $(addprefix $(SRC_PATH), $(SCR_NAME))
-
-OBJ_PATH = ./OBJ/
-
-OBJ_NAME = $(SRC_NAME:%.c=%.o)
-
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-
-HEADER_PATH = -I ../include/
-LIB_PATH = ../lib/
-
-LIBFT_PATH = -L../lib/
-LIBFT = -lft
-
-EXEC = $(addprefix $(LIB_PATH), $(NAME))
+EXEC			:= $(addprefix $(LIBDIR), $(NAME))
+CACHEF			:=	.cache_exists
 
 .PHONY: clean fclean re all
+.SILENT:
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): $(OBJ) $(SRC)
-	@echo "\033[32m" "-> Ft_printf" "\033[0m"
-	@mkdir -p $(LIB_PATH)
-	@ar rc $(EXEC) $(OBJ)
-	@ranlib $(EXEC)
+$(NAME): $(OBJ)
+	@echo "\033[32m" "-> Libft" "\033[0m"
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-$(OBJ_PATH)%.o : $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(HEADER_PATH)  -c $< -o $@
+$(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
+	$(CC) $(CFLAGS) -c  $< -o $@ $(INC)
+
+$(CACHEF):
+	test -d $(OBJDIR) || mkdir $(OBJDIR)
+	test -d $(LIBDIR) || mkdir $(LIBDIR)
+	test -d $(CACHEF) || touch $(CACHEF)
 
 clean:
-	@rm -rf $(OBJ_PATH)
+	rm -rf $(OBJDIR) $(CACHEF)
 
 fclean: clean
-	@rm -rf $(EXEC)
-	@rm -rf $(LIB_PATH)
+	rm -f $(NAME)
 
-re : fclean all
+re: fclean all

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 13:13:11 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 17:24:39 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:22:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	pick_color(t_rgb *rgb, t_mlx_img *mlx_img, t_fractal fractal, int i)
 	colors[F_BW] = (t_rgb) {
 		.r = 255 - (10 * i), .g = 255 - (10 * i), .b = 255 - (10 * i) };
 	colors[F_RED] = (t_rgb) { .r = 10 * i, .g = 10 / coef, .b = 10 / coef };
-	colors[F_BLUE] = (t_rgb) { .r = 10 / coef, .g = 10 / coef, .b = 10 * i };
+	colors[F_BLUE] = (t_rgb) { .r = 100 / coef, .g = 100 / coef, .b = 10 * coef };
 	colors[F_GREEN] = (t_rgb) { .r = 10 / coef, .g = 10 * i, .b = 10 / coef };
 	colors[F_RANDOM_1] = (t_rgb) {
 		.r = 250 * coef, .g = 250 * coef, .b = 250 * i };

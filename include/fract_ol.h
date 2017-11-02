@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 19:01:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 19:16:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define ITERATIONS 50
 # define MAX_ITERATIONS 300
-# define NB_THREADS 12
+# define NB_THREADS 8
 
 # define FPS 20
 
