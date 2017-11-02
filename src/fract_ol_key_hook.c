@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 13:45:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 17:16:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	lock_image(t_env *e)
 	e->state ^= IMAGE_LOCK;
 }
 
-static int	is_in_keyhook(int keycode)
+static void	change_color(t_env *e)
 {
-	return (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
-		|| keycode == ARROW_UP || keycode == ARROW_DOWN
-		|| keycode == KEY_L || keycode == KEY_C || keycode == KEY_N
-		|| keycode == KEY_P);
+	if (e->mlx_img.color != F_BLUE)
+		e->mlx_img.color += (enum e_fractal_color)1;
+	else
+		e->mlx_img.color = F_BW;
 }
 
 static void	next_fractal(t_env *e)
@@ -51,10 +51,14 @@ int			fract_ol_key_hook(int keycode, t_env *e)
 		[KEY_L] = lock_image,
 		[KEY_C] = change_color,
 		[KEY_N] = next_fractal,
-		[KEY_P] = previous_fractal
+		[KEY_P] = previous_fractal,
+		[KEY_R] = reset_parameters
 	};
 
-	if (is_in_keyhook(keycode))
+	if (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
+		|| keycode == ARROW_UP || keycode == ARROW_DOWN
+		|| keycode == KEY_L || keycode == KEY_C || keycode == KEY_N
+		|| keycode == KEY_P || keycode == KEY_R)
 	{
 		if (keycode != ESC && keycode != KEY_L)
 		{

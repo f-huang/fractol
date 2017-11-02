@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:38:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 17:16:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <pthread.h>
 
 # define NB_FRACTALS 3
+# define NB_COLORS 6
 
 # define IMAGE_SIZE 645
 
-# define ITERATIONS 20
-# define MAX_ITERATIONS 500
+# define ITERATIONS 50
+# define MAX_ITERATIONS 300
 # define NB_THREADS 12
 
 # define FPS 20
@@ -54,7 +55,9 @@ enum				e_fractal_type
 
 enum				e_fractal_color
 {
-	F_BW,
+	F_BW = 0,
+	F_RANDOM_1,
+	F_PINK,
 	F_RED,
 	F_GREEN,
 	F_BLUE
@@ -66,6 +69,7 @@ enum				e_key_hook
 	KEY_C = 8,
 	KEY_N = 45,
 	KEY_P = 35,
+	KEY_R = 15,
 	ESC = 53,
 	ARROW_LEFT = 123,
 	ARROW_RIGHT = 124,
@@ -161,7 +165,7 @@ typedef struct		s_env
 int					fract_ol_error(const char *str);
 void				fract_ol_quit(t_env *e);
 int					init(t_env *e, const char **av);
-int					init_threads(pthread_t **thread);
+void				init_fractal_parameters(t_fractal *fractal);
 
 enum e_fractal_type	get_fractal_type(const char *name);
 const char			*get_fractal_name(enum e_fractal_type type);
@@ -187,7 +191,7 @@ void				translate_right(t_env *e);
 void				translate_up(t_env *e);
 void				translate_down(t_env *e);
 
-void				change_color(t_env *e);
+void				reset_parameters(t_env *e);
 
 /*
 **	DRAW IMAGE

@@ -6,11 +6,9 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 10:23:32 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:40:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/02 17:17:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "libft.h"
 #include "fract_ol.h"
@@ -55,35 +53,6 @@ static int	get_number_of_fractals(const char **av)
 		++total;
 	}
 	return (total);
-}
-
-static void	init_fractal_parameters(t_fractal *fractal)
-{
-	if (fractal->type == MANDELBROT)
-	{
-		fractal->abscissa = (t_range) {
-			.min = MANDELBROT_X1, .max = MANDELBROT_X2 };
-		fractal->ordinate = (t_range) {
-			.min = MANDELBROT_Y1, .max = MANDELBROT_Y2 };
-	}
-	else if (fractal->type == JULIA)
-	{
-		fractal->motion_complex = (t_complex) {
-			.real = JULIA_INITIAL_REAL, .imaginary = JULIA_INITIAL_IMAGINARY };
-		fractal->abscissa = (t_range) { .min = JULIA_X1, .max = JULIA_X2 };
-		fractal->ordinate = (t_range) { .min = JULIA_Y1, .max = JULIA_Y2 };
-	}
-	else if (fractal->type == BURNING_SHIP)
-	{
-		fractal->abscissa = (t_range) {
-			.min = BURNING_SHIP_X1, .max = BURNING_SHIP_X2 };
-		fractal->ordinate = (t_range) {
-			.min = BURNING_SHIP_Y1, .max = BURNING_SHIP_Y2 };
-	}
-	fractal->zoom = (IMAGE_SIZE / get_distance(fractal->ordinate.max,
-		fractal->ordinate.min) + IMAGE_SIZE / get_distance(
-		fractal->abscissa.max, fractal->abscissa.min)) / 2 - IMAGE_SIZE * 0.02;
-	fractal->iteration = ITERATIONS;
 }
 
 int			init(t_env *e, const char **av)
