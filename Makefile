@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 23:26:49 by fhuang            #+#    #+#              #
-#    Updated: 2017/11/03 09:43:32 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/03 14:39:00 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBFT	:=	libft/
 LIBDIR	:=	lib/
-SRC		:=	draw_burning_ship.c				\
+SRC		:=	add_iteration.c					\
+			draw_burning_ship.c				\
 			draw_corresponding_fractal.c	\
 			draw_julia.c					\
 			draw_mandelbrot.c				\

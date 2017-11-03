@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 10:45:49 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:42:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ void		zoom_in(t_env *e, const int x, const int y)
 {
 	if (e->fractals[e->index].zoom < STEP)
 	{
-		e->fractals[e->index].iteration *= SMALL_ITERATIONS;
+		if (e->fractals[e->index].iteration < DEFAULT_MAX_ITERATIONS)
+			e->fractals[e->index].iteration *= SMALL_ITERATIONS;
 		e->fractals[e->index].zoom *= SMALL_ZOOM;
 	}
 	else
 	{
-		if (e->fractals[e->index].iteration < MAX_ITERATIONS)
+		if (e->fractals[e->index].iteration < DEFAULT_MAX_ITERATIONS)
 			e->fractals[e->index].iteration *= BIG_ITERATIONS;
 		e->fractals[e->index].zoom *= BIG_ZOOM;
 	}

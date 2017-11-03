@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 10:42:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:44:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@
 #define STRING_KEY_ESC "ESC: Quit"
 #define STRING_ARROWS "Arrows: Translate"
 #define STRING_SCROLL "Scroll: Zoom in/out"
+#define STRING_ITERATION "Iteration = "
 
 #define STR_PUT(x, y, str) mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, str)
 
-static void print_helper_strings(t_env *e)
+static void	print_helper_strings(t_env *e)
 {
+	char	*iteration;
+	char	*str;
+
 	STR_PUT(10, 10, (char*)get_fractal_name(e->fractals[e->index].type));
 	if (e->fractals[e->index].type == JULIA)
 		STR_PUT(IMAGE_SIZE - 170, 10, STRING_KEY_L);
@@ -37,6 +41,11 @@ static void print_helper_strings(t_env *e)
 	STR_PUT(IMAGE_SIZE - 220, 100, STRING_SCROLL);
 	STR_PUT(10, IMAGE_SIZE - 60, STRING_KEY_R);
 	STR_PUT(10, IMAGE_SIZE - 30, STRING_KEY_ESC);
+	iteration = ft_itoa(e->fractals[e->index].iteration);
+	str = ft_strjoin(STRING_ITERATION, iteration);
+	STR_PUT(IMAGE_SIZE - 220, IMAGE_SIZE - 30, str);
+	ft_strdel(&iteration);
+	ft_strdel(&str);
 }
 
 static void	fract_ol_draw_fractal(t_env *e)

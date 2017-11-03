@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 10:43:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:40:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # define IMAGE_SIZE 645
 
 # define ITERATIONS 50
-# define MAX_ITERATIONS 300
+# define DEFAULT_MAX_ITERATIONS 300
+# define MAX_ITERATIONS 850
 # define NB_THREADS 8
 
 # define MANDELBROT_X1 -2.1
@@ -67,6 +68,7 @@ enum				e_key_hook
 	KEY_N = 45,
 	KEY_P = 35,
 	KEY_R = 15,
+	KEY_I = 34,
 	ESC = 53,
 	ARROW_LEFT = 123,
 	ARROW_RIGHT = 124,
@@ -185,6 +187,8 @@ void				translate_left(t_env *e);
 void				translate_right(t_env *e);
 void				translate_up(t_env *e);
 void				translate_down(t_env *e);
+
+void				add_iteration(t_env *e);
 
 void				reset_parameters(t_env *e);
 

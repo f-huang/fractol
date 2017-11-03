@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 10:37:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:47:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	previous_fractal(t_env *e)
 		e->index = e->number_of_fractals - 1;
 }
 
-int			fract_ol_key_hook(int keycode, t_env *e)
+int			fract_ol_key_hook(int key, t_env *e)
 {
 	static void		((*key_actions[])(t_env *)) = {
 		[ESC] = fract_ol_quit,
@@ -52,17 +52,18 @@ int			fract_ol_key_hook(int keycode, t_env *e)
 		[KEY_C] = change_color,
 		[KEY_N] = next_fractal,
 		[KEY_P] = previous_fractal,
-		[KEY_R] = reset_parameters
+		[KEY_R] = reset_parameters,
+		[KEY_I] = add_iteration
 	};
 
-	keycode == KEY_L ? key_actions[keycode](e) : 0;
-	if (keycode == ESC || keycode == ARROW_LEFT || keycode == ARROW_RIGHT
-		|| keycode == ARROW_UP || keycode == ARROW_DOWN || keycode == KEY_C
-		|| keycode == KEY_N || keycode == KEY_P || keycode == KEY_R)
+	key == KEY_L ? key_actions[key](e) : 0;
+	if (key == ARROW_UP || key == ARROW_LEFT || key == ARROW_RIGHT
+		|| key == ARROW_DOWN || key == KEY_C || key == KEY_N
+		|| key == KEY_P || key == KEY_R || key == ESC || key == KEY_I)
 	{
 		mlx_clear_window(e->mlx, e->win);
 		mlx_destroy_image(e->mlx, e->mlx_img.img);
-		key_actions[keycode](e);
+		key_actions[key](e);
 		fract_ol_create_image(e);
 	}
 	return (0);
