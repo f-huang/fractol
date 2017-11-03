@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 23:26:49 by fhuang            #+#    #+#              #
-#    Updated: 2017/11/02 20:00:24 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/03 09:43:32 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,24 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBFT	:=	libft/
 LIBDIR	:=	lib/
-SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
+SRC		:=	draw_burning_ship.c				\
+			draw_corresponding_fractal.c	\
+			draw_julia.c					\
+			draw_mandelbrot.c				\
+			fract_ol_create_image.c			\
+			fract_ol_key_hook.c				\
+			fract_ol_motion_hook.c			\
+			fract_ol_mouse_hook.c			\
+			fract_ol_quit.c					\
+			get_fractal_name.c				\
+			get_fractal_type.c				\
+			init.c							\
+			init_fractal_parameters.c		\
+			main.c							\
+			put_pixel_in_fractal.c			\
+			reset_parameters.c				\
+			translate.c						\
+			zoom.c
 OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBFT)$(INCDIR)
 LIBPATH	:=	-lpthread -L./$(LIBFT)$(LIBDIR) -lft
@@ -49,10 +66,9 @@ WHITE		= "\033[0;37m"
 .PHONY: all libft norme clean fclean re
 .SILENT:
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJ)
-	make -C $(LIBFT)
 	$(CC) $(MLXFLAGS) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(INC)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
 

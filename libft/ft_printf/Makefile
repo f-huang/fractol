@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2017/11/02 19:59:24 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/03 09:43:21 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,29 @@ CFLAGS	:=	-Wall -Wextra -Werror -g3
 SRCDIR	:=	src/
 OBJDIR	:=	obj/
 INCDIR	:=	../include/
-SRC		:=	$(shell basename $(shell find $(SRCDIR) -type f))
+SRC		:=	add_link.c					\
+			desactivate_flags.c			\
+			ft_ctoa_base.c				\
+			ft_lltoa_base.c				\
+			ft_ltoa_base.c				\
+			ft_printf.c					\
+			ft_printf_itoa_base.c		\
+			ft_stoa_base.c				\
+			get_color.c					\
+			get_struct.c				\
+			get_type.c					\
+			get_type_int.c				\
+			init_destroy.c				\
+			new_link.c					\
+			no_type.c					\
+			print_entire_list.c			\
+			read_and_transform_arg.c	\
+			read_str.c					\
+			transform_flags.c			\
+			transform_for_numbers.c		\
+			transform_for_strings.c		\
+			transform_tools.c			\
+			transform_wchar.c
 OBJ		:=	$(SRC:%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
