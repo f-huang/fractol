@@ -6,12 +6,38 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 00:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:13:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:42:20 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "mlx.h"
 #include "fract_ol.h"
+
+#define STRING_KEY_L "L: lock image"
+#define STRING_KEY_P "P: Previous fractal"
+#define STRING_KEY_N "N: Next fractal"
+#define STRING_KEY_R "R: Reset"
+#define STRING_KEY_C "C: Change color"
+#define STRING_KEY_ESC "ESC: Quit"
+#define STRING_ARROWS "Arrows: Translate"
+#define STRING_SCROLL "Scroll: Zoom in/out"
+
+#define STR_PUT(x, y, str) mlx_string_put(e->mlx, e->win, x, y, 0xFFFFFF, str)
+
+static void print_helper_strings(t_env *e)
+{
+	STR_PUT(10, 10, (char*)get_fractal_name(e->fractals[e->index].type));
+	if (e->fractals[e->index].type == JULIA)
+		STR_PUT(IMAGE_SIZE - 170, 10, STRING_KEY_L);
+	STR_PUT(10, 50, STRING_KEY_P);
+	STR_PUT(10, 70, STRING_KEY_N);
+	STR_PUT(IMAGE_SIZE - 170, 40, STRING_KEY_C);
+	STR_PUT(IMAGE_SIZE - 220, 80, STRING_ARROWS);
+	STR_PUT(IMAGE_SIZE - 220, 100, STRING_SCROLL);
+	STR_PUT(10, IMAGE_SIZE - 60, STRING_KEY_R);
+	STR_PUT(10, IMAGE_SIZE - 30, STRING_KEY_ESC);
+}
 
 static void	fract_ol_draw_fractal(t_env *e)
 {
@@ -47,5 +73,6 @@ int			fract_ol_create_image(t_env *e)
 		&e->mlx_img.bits_per_pixel, &e->mlx_img.size_line, &e->mlx_img.endian);
 	fract_ol_draw_fractal(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->mlx_img.img, 0, 0);
+	print_helper_strings(e);
 	return (1);
 }

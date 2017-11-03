@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 23:07:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 17:23:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:37:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	lock_image(t_env *e)
 
 static void	change_color(t_env *e)
 {
-	if (e->mlx_img.color != F_BLUE)
+	if (e->mlx_img.color != (enum e_fractal_color)(NB_COLORS - 1))
 		e->mlx_img.color += (enum e_fractal_color)1;
 	else
-		e->mlx_img.color = F_BW;
+		e->mlx_img.color = (enum e_fractal_color)0;
 }
 
 static void	next_fractal(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 13:54:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 19:16:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:43:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # define ITERATIONS 50
 # define MAX_ITERATIONS 300
 # define NB_THREADS 8
-
-# define FPS 20
 
 # define MANDELBROT_X1 -2.1
 # define MANDELBROT_X2 0.6
@@ -54,11 +52,11 @@ enum				e_fractal_type
 
 enum				e_fractal_color
 {
-	F_BW = 0,
+	F_RED = 0,
+	F_GREEN,
+	F_BW,
 	F_RANDOM_1,
 	F_PINK,
-	F_RED,
-	F_GREEN,
 	F_BLUE
 };
 
@@ -130,7 +128,6 @@ typedef struct		s_mlx_img
 	int						bits_per_pixel;
 	int						size_line;
 	int						endian;
-	t_rgb					rgb;
 	enum e_fractal_color	color;
 }					t_mlx_img;
 

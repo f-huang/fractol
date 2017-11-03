@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 10:23:32 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 17:17:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:35:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int			init(t_env *e, const char **av)
 			++j;
 		}
 	}
-	e->mlx_img.rgb = (t_rgb) { .r = 10, .g = 10, .b = 10 };
-	e->mlx_img.color = F_BW;
+	e->mlx_img.color = F_RED;
 	e->screen_cut_size = e->mlx_img.size / NB_THREADS +\
 		((int)e->mlx_img.size % NB_THREADS ? 1 : 0);
 	e->nb_screen_cut = e->mlx_img.size / e->screen_cut_size +\
