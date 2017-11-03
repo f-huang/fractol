@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/29 21:34:23 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:31:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ long				ft_atol(const char *str);
 int					ft_atoi_base(const char *str, int base);
 size_t				ft_count_words(const char *s, char c);
 size_t				ft_strlen(char const *s);
-void				ft_strupper(char *str);
+char				*ft_strupper(char *str);
 int					ft_isstrdigit(char const *s);
 int					ft_isstrempty(char const *s);
 char				*ft_strcpy(char *dst, const char *src);
@@ -169,6 +169,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
+int					ft_strequ_case(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);

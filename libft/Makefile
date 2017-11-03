@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 16:52:41 by fhuang            #+#    #+#              #
-#    Updated: 2017/11/03 09:41:32 by fhuang           ###   ########.fr        #
+#    Updated: 2017/11/03 14:24:50 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ SRC		:=	btree_apply_infix.c		\
 			ft_strdelchar.c			\
 			ft_strdup.c				\
 			ft_strequ.c				\
+			ft_strequ_case.c		\
 			ft_strinsert.c			\
 			ft_striter.c			\
 			ft_striteri.c			\

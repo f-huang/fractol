@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_fractal_type.c                                 :+:      :+:    :+:   */
+/*   ft_strequ_case.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 18:53:24 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 14:26:07 by fhuang           ###   ########.fr       */
+/*   Created: 2017/11/03 10:49:47 by fhuang            #+#    #+#             */
+/*   Updated: 2017/11/03 14:31:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fract_ol.h"
 
-enum e_fractal_type	get_fractal_type(const char *name)
+int		ft_strequ_case(char const *s1, char const *s2)
 {
 	int		i;
 
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (0);
 	i = 0;
-	while (i < NB_FRACTALS)
+	while (s1[i])
 	{
-		if (ft_strequ_case(name, get_fractal_name((enum e_fractal_type)i)))
-			return (i);
-		++i;
+		if (ft_toupper(s1[i]) == ft_toupper(s2[i]))
+			++i;
+		else
+			return (0);
 	}
-	return (-1);
+	return (1);
 }

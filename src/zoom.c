@@ -6,14 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/02 14:19:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:45:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fract_ol.h"
 
-#define STEP 800
+#define STEP 680
 
 #define SMALL_ZOOM 1.2
 #define BIG_ZOOM 1.5
