@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 10:54:52 by fhuang            #+#    #+#             */
-/*   Updated: 2017/11/03 14:42:28 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/05 14:21:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		zoom_out(t_env *e, const int x, const int y)
 		else
 			e->fractals[e->index].zoom /= BIG_ZOOM;
 	}
-	e->fractals[e->index].iteration /= SMALL_ITERATIONS;
+	if (e->fractals[e->index].iteration > ITERATIONS)
+		e->fractals[e->index].iteration /= SMALL_ITERATIONS;
 	zoom_calculate(e, x, y);
 }
